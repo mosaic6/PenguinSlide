@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>CEF03239-A8B2-46D4-BD5D-627991F729D7</string>
+	<key>IDESourceControlProjectName</key>
+	<string>PenguinSlider</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>5988FDDA-9053-411D-AB57-746DAE78E996</key>
+		<string>https://github.com/mosaic6/PenguinSlide.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>PenguinSlider.spritebuilder/PenguinSlider.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>5988FDDA-9053-411D-AB57-746DAE78E996</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/mosaic6/PenguinSlide.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>5988FDDA-9053-411D-AB57-746DAE78E996</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>5988FDDA-9053-411D-AB57-746DAE78E996</string>
+			<key>IDESourceControlWCCName</key>
+			<string>PenguinSlide</string>
+		</dict>
+	</array>
+</dict>
+</plist>
