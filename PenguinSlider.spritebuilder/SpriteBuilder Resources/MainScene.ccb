@@ -128,7 +128,7 @@
 						<key>type</key>
 						<string>Check</string>
 						<key>value</key>
-						<true/>
+						<false/>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -278,7 +278,7 @@
 			<key>name</key>
 			<string>Default Timeline</string>
 			<key>offset</key>
-			<real>0.0</real>
+			<real>0.58128547668457031</real>
 			<key>position</key>
 			<real>0.0</real>
 			<key>resolution</key>

@@ -7,7 +7,7 @@
 		<key>Sprites/button_03.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{1, 1529}, {325, 336}}</string>
+			<string>{{1, 882}, {325, 336}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
@@ -20,7 +20,7 @@
 		<key>Sprites/button_07.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{328, 1529}, {229, 236}}</string>
+			<string>{{1, 1220}, {229, 236}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
@@ -56,18 +56,18 @@
 			<key>sourceSize</key>
 			<string>{519, 373}</string>
 		</dict>
-		<key>Sprites/slide_02.png</key>
+		<key>Sprites/star_05.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{1, 806}, {1305, 721}}</string>
+			<string>{{1, 1458}, {232, 219}}</string>
 			<key>offset</key>
-			<string>{-17, 0}</string>
+			<string>{0, 0}</string>
 			<key>rotated</key>
-			<false/>
+			<true/>
 			<key>sourceColorRect</key>
-			<string>{{1, 36}, {1305, 721}}</string>
+			<string>{{0, 8}, {232, 219}}</string>
 			<key>sourceSize</key>
-			<string>{1342, 793}</string>
+			<string>{232, 234}</string>
 		</dict>
 		<key>Sprites/stars_03.png</key>
 		<dict>

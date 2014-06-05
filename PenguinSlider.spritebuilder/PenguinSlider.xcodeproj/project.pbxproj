@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		619E99A5193FDFE000DC1A38 /* Level.m in Sources */ = {isa = PBXBuildFile; fileRef = 619E99A4193FDFE000DC1A38 /* Level.m */; };
 		619E99AE193FFA4300DC1A38 /* pressSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 619E99AD193FFA4300DC1A38 /* pressSound.wav */; };
+		619E99B41940EDAE00DC1A38 /* star.wav in Resources */ = {isa = PBXBuildFile; fileRef = 619E99B31940EDAE00DC1A38 /* star.wav */; };
+		619E99BA1940F12E00DC1A38 /* background_music.wav in Resources */ = {isa = PBXBuildFile; fileRef = 619E99B91940F12E00DC1A38 /* background_music.wav */; };
 		B71F5911188484E7003F4D28 /* iPad-old.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5907188484E7003F4D28 /* iPad-old.png */; };
 		B71F5912188484E7003F4D28 /* iPad-old@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5908188484E7003F4D28 /* iPad-old@2x.png */; };
 		B71F5913188484E7003F4D28 /* iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5909188484E7003F4D28 /* iPad.png */; };
@@ -60,6 +62,8 @@
 		619E99A3193FDFE000DC1A38 /* Level.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Level.h; sourceTree = "<group>"; };
 		619E99A4193FDFE000DC1A38 /* Level.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Level.m; sourceTree = "<group>"; };
 		619E99AD193FFA4300DC1A38 /* pressSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = pressSound.wav; sourceTree = "<group>"; };
+		619E99B31940EDAE00DC1A38 /* star.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = star.wav; sourceTree = "<group>"; };
+		619E99B91940F12E00DC1A38 /* background_music.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = background_music.wav; sourceTree = "<group>"; };
 		B71F5907188484E7003F4D28 /* iPad-old.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPad-old.png"; path = "Icons/iPad-old.png"; sourceTree = "<group>"; };
 		B71F5908188484E7003F4D28 /* iPad-old@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPad-old@2x.png"; path = "Icons/iPad-old@2x.png"; sourceTree = "<group>"; };
 		B71F5909188484E7003F4D28 /* iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iPad.png; path = Icons/iPad.png; sourceTree = "<group>"; };
@@ -119,6 +123,8 @@
 		619E99AB193FFA3000DC1A38 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				619E99B31940EDAE00DC1A38 /* star.wav */,
+				619E99B91940F12E00DC1A38 /* background_music.wav */,
 				619E99AD193FFA4300DC1A38 /* pressSound.wav */,
 			);
 			name = Audio;
@@ -262,7 +268,7 @@
 				ORGANIZATIONNAME = Apportable;
 				TargetAttributes = {
 					B77F1B2D17B978D7009739AE = {
-						DevelopmentTeam = SBVP8ED765;
+						DevelopmentTeam = P624W8659J;
 						SystemCapabilities = {
 							com.apple.GameCenter = {
 								enabled = 0;
@@ -315,8 +321,10 @@
 				B71F5914188484E7003F4D28 /* iPad@2x.png in Resources */,
 				B71F5913188484E7003F4D28 /* iPad.png in Resources */,
 				B71F5912188484E7003F4D28 /* iPad-old@2x.png in Resources */,
+				619E99BA1940F12E00DC1A38 /* background_music.wav in Resources */,
 				B71F5916188484E7003F4D28 /* iPhone-old@2x.png in Resources */,
 				B737893B180761570076A88C /* Published-iOS in Resources */,
+				619E99B41940EDAE00DC1A38 /* star.wav in Resources */,
 				B71F591A188484E7003F4D28 /* Settings@2x.png in Resources */,
 				B7378976180762440076A88C /* Default-Landscape~ipad.png in Resources */,
 				B71F5915188484E7003F4D28 /* iPhone-old.png in Resources */,
