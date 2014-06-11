@@ -8,6 +8,22 @@
 
 #import "CCNode.h"
 
-@interface MainScene : CCNode
-
+@interface MainScene : CCNode <CCPhysicsCollisionDelegate>
+{
+    CCPhysicsNode *_physicsNode;
+    CCSprite *_penguin;
+    CCSprite *_slide;
+    
+    CCNode *_ground1;
+    CCNode *_ground2;
+    
+    CGFloat scrollSpeed;
+    
+    NSArray *_grounds;
+    NSMutableArray *_stars;
+    NSTimeInterval _sinceTouch;
+    
+    NSInteger _points;
+    CCLabelTTF *_pointLabel;
+}
 @end

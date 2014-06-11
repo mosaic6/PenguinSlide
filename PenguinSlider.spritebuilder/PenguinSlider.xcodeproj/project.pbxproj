@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		619E99A5193FDFE000DC1A38 /* Level.m in Sources */ = {isa = PBXBuildFile; fileRef = 619E99A4193FDFE000DC1A38 /* Level.m */; };
+		614799281948B53A005A3BE2 /* StarNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 614799271948B53A005A3BE2 /* StarNode.m */; };
+		6147992C1948C90F005A3BE2 /* StarPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 6147992B1948C90F005A3BE2 /* StarPoint.m */; };
 		619E99AE193FFA4300DC1A38 /* pressSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 619E99AD193FFA4300DC1A38 /* pressSound.wav */; };
 		619E99B41940EDAE00DC1A38 /* star.wav in Resources */ = {isa = PBXBuildFile; fileRef = 619E99B31940EDAE00DC1A38 /* star.wav */; };
 		619E99BA1940F12E00DC1A38 /* background_music.wav in Resources */ = {isa = PBXBuildFile; fileRef = 619E99B91940F12E00DC1A38 /* background_music.wav */; };
@@ -59,8 +60,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		619E99A3193FDFE000DC1A38 /* Level.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Level.h; sourceTree = "<group>"; };
-		619E99A4193FDFE000DC1A38 /* Level.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Level.m; sourceTree = "<group>"; };
+		614799261948B53A005A3BE2 /* StarNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StarNode.h; sourceTree = "<group>"; };
+		614799271948B53A005A3BE2 /* StarNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StarNode.m; sourceTree = "<group>"; };
+		6147992A1948C90F005A3BE2 /* StarPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StarPoint.h; sourceTree = "<group>"; };
+		6147992B1948C90F005A3BE2 /* StarPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StarPoint.m; sourceTree = "<group>"; };
 		619E99AD193FFA4300DC1A38 /* pressSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = pressSound.wav; sourceTree = "<group>"; };
 		619E99B31940EDAE00DC1A38 /* star.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = star.wav; sourceTree = "<group>"; };
 		619E99B91940F12E00DC1A38 /* background_music.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = background_music.wav; sourceTree = "<group>"; };
@@ -145,8 +148,10 @@
 				B737893E1807617C0076A88C /* AppDelegate.m */,
 				B7378992180767190076A88C /* MainScene.h */,
 				B7378993180767190076A88C /* MainScene.m */,
-				619E99A3193FDFE000DC1A38 /* Level.h */,
-				619E99A4193FDFE000DC1A38 /* Level.m */,
+				6147992A1948C90F005A3BE2 /* StarPoint.h */,
+				6147992B1948C90F005A3BE2 /* StarPoint.m */,
+				614799261948B53A005A3BE2 /* StarNode.h */,
+				614799271948B53A005A3BE2 /* StarNode.m */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -344,8 +349,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B737893F1807617C0076A88C /* AppDelegate.m in Sources */,
+				614799281948B53A005A3BE2 /* StarNode.m in Sources */,
 				B7378994180767190076A88C /* MainScene.m in Sources */,
-				619E99A5193FDFE000DC1A38 /* Level.m in Sources */,
+				6147992C1948C90F005A3BE2 /* StarPoint.m in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

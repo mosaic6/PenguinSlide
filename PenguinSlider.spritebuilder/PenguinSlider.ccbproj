@@ -73,7 +73,7 @@
 	<key>publishToZipFile</key>
 	<false/>
 	<key>resourceAutoScaleFactor</key>
-	<integer>4</integer>
+	<integer>2</integer>
 	<key>resourcePaths</key>
 	<array>
 		<dict>
@@ -88,11 +88,15 @@
 			<key>previewFolderHidden</key>
 			<true/>
 		</dict>
+		<key>MainScene.ccbi</key>
+		<dict/>
 		<key>Sprites</key>
 		<dict>
 			<key>isSmartSpriteSheet</key>
 			<true/>
 		</dict>
+		<key>Star.ccbi</key>
+		<dict/>
 		<key>ccbResources</key>
 		<dict>
 			<key>previewFolderHidden</key>

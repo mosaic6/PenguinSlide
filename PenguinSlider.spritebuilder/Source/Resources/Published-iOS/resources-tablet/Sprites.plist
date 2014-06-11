@@ -7,80 +7,54 @@
 		<key>Sprites/button_03.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{1, 443}, {162, 168}}</string>
+			<string>{{1, 540}, {125, 129}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
 			<false/>
 			<key>sourceColorRect</key>
-			<string>{{0, 0}, {162, 168}}</string>
+			<string>{{7, 2}, {125, 129}}</string>
 			<key>sourceSize</key>
-			<string>{162, 168}</string>
-		</dict>
-		<key>Sprites/button_07.png</key>
-		<dict>
-			<key>frame</key>
-			<string>{{1, 613}, {114, 118}}</string>
-			<key>offset</key>
-			<string>{0, 0}</string>
-			<key>rotated</key>
-			<false/>
-			<key>sourceColorRect</key>
-			<string>{{0, 0}, {114, 118}}</string>
-			<key>sourceSize</key>
-			<string>{114, 118}</string>
+			<string>{138, 134}</string>
 		</dict>
 		<key>Sprites/para_03.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{757, 172}, {245, 269}}</string>
+			<string>{{1, 1}, {490, 537}}</string>
 			<key>offset</key>
-			<string>{5, -4}</string>
+			<string>{11, -9}</string>
 			<key>rotated</key>
 			<false/>
 			<key>sourceColorRect</key>
-			<string>{{11, 9}, {245, 269}}</string>
+			<string>{{22, 19}, {490, 537}}</string>
 			<key>sourceSize</key>
-			<string>{256, 278}</string>
+			<string>{512, 556}</string>
 		</dict>
 		<key>Sprites/penguin_03.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{757, 1}, {252, 169}}</string>
+			<string>{{493, 1}, {507, 340}}</string>
 			<key>offset</key>
-			<string>{1, 2}</string>
+			<string>{1, 5}</string>
 			<key>rotated</key>
 			<false/>
 			<key>sourceColorRect</key>
-			<string>{{4, 6}, {252, 169}}</string>
+			<string>{{7, 11}, {507, 340}}</string>
 			<key>sourceSize</key>
-			<string>{259, 186}</string>
+			<string>{519, 373}</string>
 		</dict>
-		<key>Sprites/star_05.png</key>
+		<key>Sprites/star_04.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{1, 733}, {116, 110}}</string>
+			<string>{{1, 671}, {94, 88}}</string>
 			<key>offset</key>
-			<string>{0, -1}</string>
+			<string>{-6, 1}</string>
 			<key>rotated</key>
 			<true/>
 			<key>sourceColorRect</key>
-			<string>{{0, 4}, {116, 110}}</string>
+			<string>{{1, 1}, {94, 88}}</string>
 			<key>sourceSize</key>
-			<string>{116, 117}</string>
-		</dict>
-		<key>Sprites/stars_03.png</key>
-		<dict>
-			<key>frame</key>
-			<string>{{1, 1}, {754, 401}}</string>
-			<key>offset</key>
-			<string>{6, -8}</string>
-			<key>rotated</key>
-			<false/>
-			<key>sourceColorRect</key>
-			<string>{{14, 19}, {754, 401}}</string>
-			<key>sourceSize</key>
-			<string>{771, 422}</string>
+			<string>{108, 92}</string>
 		</dict>
 	</dict>
 	<key>metadata</key>

@@ -45,7 +45,7 @@
 			<key>density</key>
 			<real>1</real>
 			<key>dynamic</key>
-			<true/>
+			<false/>
 			<key>elasticity</key>
 			<real>0.30000001192092896</real>
 			<key>friction</key>
@@ -53,24 +53,24 @@
 			<key>points</key>
 			<array>
 				<array>
-					<real>16.13671875</real>
-					<real>29.83203125</real>
+					<real>2.5625</real>
+					<real>378.7109375</real>
 				</array>
 				<array>
-					<real>173.984375</real>
-					<real>25.60546875</real>
+					<real>3.296875</real>
+					<real>17.625</real>
 				</array>
 				<array>
-					<real>246.57421875</real>
-					<real>99.89453125</real>
+					<real>654.87890625</real>
+					<real>18.94921875</real>
 				</array>
 				<array>
-					<real>207.55859375</real>
-					<real>167.77734375</real>
+					<real>586.17578125</real>
+					<real>131.28125</real>
 				</array>
 				<array>
-					<real>26.20703125</real>
-					<real>105.76953125</real>
+					<real>50.73046875</real>
+					<real>366.56640625</real>
 				</array>
 			</array>
 		</dict>
@@ -105,8 +105,8 @@
 				<string>Point</string>
 				<key>value</key>
 				<array>
-					<real>0.5</real>
-					<real>0.5</real>
+					<real>0.0</real>
+					<real>0.0</real>
 				</array>
 			</dict>
 			<dict>
@@ -130,7 +130,7 @@
 				<key>value</key>
 				<array>
 					<string></string>
-					<string>Sprites/penguin_03.png</string>
+					<string>slide_02.png</string>
 				</array>
 			</dict>
 			<dict>
