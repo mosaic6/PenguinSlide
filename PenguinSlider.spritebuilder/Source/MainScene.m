@@ -55,11 +55,55 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     return YES;
 }
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair penguin:(CCNode *)penguin points:(CCNode *)points{
-    NSLog(@"POINT");
     [points removeFromParent];
     _points++;
     _pointLabel.string = [NSString stringWithFormat:@"%ld", (long)_points];
+    NSLog(@"%ld", (long)_points);
     
+    if (_points == 5) {
+        scrollSpeed = scrollSpeed * 1.2f;
+    }
+    if (_points == 10) {
+        scrollSpeed = scrollSpeed * 1.2f;
+    }
+    if (_points == 15) {
+        scrollSpeed = scrollSpeed * 1.2f;
+    }
+    if (_points == 20) {
+        scrollSpeed = scrollSpeed * 1.2f;
+    }
+    if (_points == 25) {
+        scrollSpeed = scrollSpeed * 1.2f;
+    }
+    if (_points == 30) {
+        scrollSpeed = scrollSpeed * 1.2f;
+    }
+    if (_points == 35) {
+        scrollSpeed = scrollSpeed * 1.2f;
+    }
+    if (_points == 40) {
+        scrollSpeed = scrollSpeed * 1.2f;
+    }
+    if (_points == 45) {
+        scrollSpeed = scrollSpeed * 1.2f;
+    }
+    if (_points == 50) {
+        scrollSpeed = scrollSpeed * 1.2f;
+    }
+    if (_points == 55) {
+        scrollSpeed = scrollSpeed * 1.2f;
+    }
+    if (_points == 60) {
+        scrollSpeed = scrollSpeed * 1.2f;
+    }
+    if (_points == 80) {
+        scrollSpeed = scrollSpeed * 1.2f;
+    }
+    if (_points == 100) {
+        scrollSpeed = scrollSpeed * 1.2f;
+    }
+    
+    NSLog(@"%f", scrollSpeed);
     OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
     [audio playEffect:@"star.wav"];
     
@@ -116,6 +160,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     if ((_sinceTouch > 0.5f)) {
         [_penguin.physicsBody applyAngularImpulse:-10000.f*delta];
     }
+    
     
     NSMutableArray *outOfViewStars = nil;
     for (CCNode *star in _stars) {
