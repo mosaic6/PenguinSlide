@@ -10,6 +10,8 @@
 
 @interface MainScene : CCNode <CCPhysicsCollisionDelegate>
 {
+    OALSimpleAudio *bgAudio;
+    
     CCPhysicsNode *_physicsNode;
     CCSprite *_penguin;
     CCSprite *_slide;
@@ -25,5 +27,8 @@
     
     NSInteger _points;
     CCLabelTTF *_pointLabel;
+    
+    CCButton *_restartBtn;
+    BOOL _gameOver;
 }
 @end

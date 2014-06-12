@@ -11,23 +11,21 @@
 @implementation StarNode
 #define ARC4RANDOM_MAX      0x100000000
 
-static const CGFloat minYPosition = 44.f;
+static const CGFloat minYPosition = 50.f;
 
-static const CGFloat maxYPosition = 300.f;
+static const CGFloat maxYPosition = 320.f;
 
-//static const CGFloat startPosition = 200.f;
-
-//static const CGFloat starDistance = 123.f;
 
 - (void)setRandomPosition {
     CGFloat random = ((double)arc4random() / ARC4RANDOM_MAX);
     CGFloat range = maxYPosition - minYPosition;
-    _star.position = ccp(_star.position.y, minYPosition + (random * range));
+    _star.position = ccp(_star.position.x, minYPosition + (random * range));
 }
 
 - (void)didLoadFromCCB{
-    _star.physicsBody.collisionType = @"point";
+    _star.physicsBody.collisionType = @"points";
     _star.physicsBody.sensor = TRUE;
-    
+    _star.position = ccp(_star.position.x, _star.position.y);
+
 }
 @end

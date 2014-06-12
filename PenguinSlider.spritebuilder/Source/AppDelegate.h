@@ -28,6 +28,7 @@
 
 @interface AppController : CCAppDelegate
 {
+//    OALSimpleAudio *bgAudio;
 }
 
 @end

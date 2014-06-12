@@ -11,7 +11,7 @@
 @implementation StarPoint
 
 - (void)didLoadFromCCB {
-    self.physicsBody.collisionType = @"point";
+    self.physicsBody.collisionType = @"points";
     self.physicsBody.sensor = TRUE;
 }
 @end

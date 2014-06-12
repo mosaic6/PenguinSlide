@@ -8,6 +8,7 @@
 
 #import "MainScene.h"
 #import "StarNode.h"
+#import "AppDelegate.h"
 //static const CGFloat scrollSpeed = 90.f;
 static const CGFloat firstStarPosition = 500.f;
 static const CGFloat distanceBetweenStars = 195.f;
@@ -22,8 +23,13 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 
 
 - (void)didLoadFromCCB {
+    
+    bgAudio = [OALSimpleAudio sharedInstance];
+    [bgAudio playEffect:@"background_music.wav" volume:0.6 pitch:1.0 pan:0.0 loop:YES];
+    
     _grounds = @[_ground1, _ground2];
-    self.userInteractionEnabled = TRUE;
+    self.userInteractionEnabled = YES;
+    _physicsNode.collisionDelegate = self;
     
     for (CCNode *ground in _grounds){
         ground.physicsBody.collisionType = @"level";
@@ -36,18 +42,28 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     [self createNewStar];
     [self createNewStar];
     [self createNewStar];
+    
     scrollSpeed = 100.f;
 }
-- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair penguin:(CCNode *)penguin level:(CCNode *)level{
-    NSLog(@"POINT");
-    return TRUE;
+- (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair penguin:(CCNode *)penguin star:(CCNode *)star{
+    [star removeFromParent];
 }
-- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair penguin:(CCNode *)penguin point:(CCNode *)point{
+- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair penguin:(CCNode *)penguin level:(CCNode *)level{
+    [self gameOver];
+    OALSimpleAudio *crashAudio = [OALSimpleAudio sharedInstance];
+    [crashAudio playEffect:@"crash.wav"];
+    return YES;
+}
+- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair penguin:(CCNode *)penguin points:(CCNode *)points{
     NSLog(@"POINT");
-    [point removeFromParent];
+    [points removeFromParent];
     _points++;
     _pointLabel.string = [NSString stringWithFormat:@"%ld", (long)_points];
-    return  TRUE;
+    
+    OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
+    [audio playEffect:@"star.wav"];
+    
+    return YES;
 }
 - (void)createNewStar{
     CCNode *previousStar = [_stars lastObject];
@@ -57,6 +73,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     }
     StarNode *star = (StarNode *)[CCBReader load:@"Star"];
     star.position = ccp(previousStarXPosition + distanceBetweenStars, 0);
+    [star setRandomPosition];
     [_physicsNode addChild:star];
     [_stars addObject:star];
     star.zOrder = DrawingOrderStars;
@@ -65,12 +82,13 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 - (void)launchPenguin:(id)sender{
     
     OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
-    [audio playEffect:@"pressSound.wav"];
+    [audio playEffect:@"pressSound.wav" volume:0.3 pitch:1.0 pan:0.0 loop:NO];
     
-    [_penguin.physicsBody applyImpulse:ccp(0, 700.f)];
-    [_penguin.physicsBody applyAngularImpulse:500000.f];
-    _sinceTouch = 0.f;
-    
+    if (!_gameOver) {
+        [_penguin.physicsBody applyImpulse:ccp(0, 1000.f)];
+        [_penguin.physicsBody applyAngularImpulse:50000.f];
+        _sinceTouch = 0.f;
+    }
     
 }
 
@@ -86,7 +104,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
         }
     }
     
-    float yVelocity = clampf(_penguin.physicsBody.velocity.y, -1 * MAXFLOAT, 100.f);
+    float yVelocity = clampf(_penguin.physicsBody.velocity.y, -1 * MAXFLOAT, 250.f);
     _penguin.physicsBody.velocity = ccp(0, yVelocity);
     
     _sinceTouch += delta;
@@ -114,6 +132,26 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
         [starToRemove removeFromParent];
         [_stars removeObject:starToRemove];
         [self createNewStar];
+    }
+}
+- (void)restart{
+    CCScene *scene = [CCBReader loadAsScene:@"MainScene"];
+    [[CCDirector sharedDirector]replaceScene:scene];
+}
+- (void)gameOver{
+    if (!_gameOver) {
+        scrollSpeed = 0.f;
+        _gameOver = YES;
+        _restartBtn.visible = YES;
+        _penguin.rotation = 90.f;
+        _penguin.physicsBody.allowsRotation = NO;
+        [bgAudio stopAllEffects];
+        [_penguin stopAllActions];
+        CCActionMoveBy *mb = [CCActionMoveBy actionWithDuration:0.3f position:ccp(-2, 2)];
+        CCActionInterval *reverseMove = [mb reverse];
+        CCActionSequence *as = [CCActionSequence actionWithArray:@[mb, reverseMove]];
+        CCActionEaseBounce *bounce = [CCActionEaseBounce actionWithAction:as];
+        [self runAction: bounce];
     }
 }
 @end
