@@ -46,6 +46,11 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     scrollSpeed = 100.f;
 }
 - (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair penguin:(CCNode *)penguin star:(CCNode *)star{
+    
+    CCParticleSystem *hitStar = (CCParticleSystem *)[CCBReader load:@"HitStar"];
+    hitStar.autoRemoveOnFinish = YES;
+    hitStar.position = star.position;
+    [star.parent addChild:hitStar];
     [star removeFromParent];
 }
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair penguin:(CCNode *)penguin level:(CCNode *)level{
@@ -55,6 +60,10 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     return YES;
 }
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair penguin:(CCNode *)penguin points:(CCNode *)points{
+    CCParticleSystem *hitStar = (CCParticleSystem *)[CCBReader load:@"HitStar"];
+    hitStar.autoRemoveOnFinish = YES;
+    hitStar.position = points.position;
+    [points.parent addChild:hitStar];
     [points removeFromParent];
     _points++;
     _pointLabel.string = [NSString stringWithFormat:@"%ld", (long)_points];
@@ -183,6 +192,22 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     CCScene *scene = [CCBReader loadAsScene:@"MainScene"];
     [[CCDirector sharedDirector]replaceScene:scene];
 }
+
+- (void)pauseGame{
+    NSLog(@"Game Paused");
+    
+    scrollSpeed = 0.f;
+    _penguin.position = ccp(_penguin.position.x, _penguin.position.y);
+    _penguin.physicsBody.allowsRotation = NO;
+    [bgAudio paused];
+    [_penguin stopAllActions];
+    [_penguin paused];
+    _launchBtn.userInteractionEnabled = NO;
+}
+
+
+
+// If the penguin object hits the ground object, the game will end and all functions will stop
 - (void)gameOver{
     if (!_gameOver) {
         scrollSpeed = 0.f;
@@ -192,6 +217,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
         _penguin.physicsBody.allowsRotation = NO;
         [bgAudio stopAllEffects];
         [_penguin stopAllActions];
+        _launchBtn.userInteractionEnabled = NO;
         CCActionMoveBy *mb = [CCActionMoveBy actionWithDuration:0.3f position:ccp(-2, 2)];
         CCActionInterval *reverseMove = [mb reverse];
         CCActionSequence *as = [CCActionSequence actionWithArray:@[mb, reverseMove]];

@@ -28,7 +28,11 @@
     NSInteger _points;
     CCLabelTTF *_pointLabel;
     
+    CCButton *_launchBtn;
+    
     CCButton *_restartBtn;
     BOOL _gameOver;
+    
+    CCButton *_pauseBtn;
 }
 @end

@@ -7,7 +7,7 @@
 		<key>Sprites/button_03.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{1, 540}, {125, 129}}</string>
+			<string>{{1, 694}, {125, 129}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
@@ -46,7 +46,7 @@
 		<key>Sprites/star_04.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{1, 671}, {94, 88}}</string>
+			<string>{{88, 540}, {94, 88}}</string>
 			<key>offset</key>
 			<string>{-6, 1}</string>
 			<key>rotated</key>
@@ -55,6 +55,19 @@
 			<string>{{1, 1}, {94, 88}}</string>
 			<key>sourceSize</key>
 			<string>{108, 92}</string>
+		</dict>
+		<key>Sprites/wing_05.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1, 540}, {152, 85}}</string>
+			<key>offset</key>
+			<string>{4, -3}</string>
+			<key>rotated</key>
+			<true/>
+			<key>sourceColorRect</key>
+			<string>{{9, 10}, {152, 85}}</string>
+			<key>sourceSize</key>
+			<string>{163, 98}</string>
 		</dict>
 	</dict>
 	<key>metadata</key>
