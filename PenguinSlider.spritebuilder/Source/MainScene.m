@@ -9,7 +9,7 @@
 #import "MainScene.h"
 #import "StarNode.h"
 #import "AppDelegate.h"
-//static const CGFloat scrollSpeed = 90.f;
+
 static const CGFloat firstStarPosition = 500.f;
 static const CGFloat distanceBetweenStars = 195.f;
 
@@ -196,13 +196,10 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 - (void)pauseGame{
     NSLog(@"Game Paused");
     
-    scrollSpeed = 0.f;
-    _penguin.position = ccp(_penguin.position.x, _penguin.position.y);
-    _penguin.physicsBody.allowsRotation = NO;
-    [bgAudio paused];
-    [_penguin stopAllActions];
-    [_penguin paused];
-    _launchBtn.userInteractionEnabled = NO;
+    CCScene *pauseScreen = [CCBReader loadAsScene:@"PauseScreen"];
+    [self addChild:pauseScreen];
+    [[CCDirector sharedDirector]pause];
+    [bgAudio stopAllEffects];
 }
 
 
