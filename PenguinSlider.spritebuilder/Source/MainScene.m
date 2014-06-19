@@ -45,20 +45,15 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     
     scrollSpeed = 100.f;
 }
-- (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair penguin:(CCNode *)penguin star:(CCNode *)star{
-    
-    CCParticleSystem *hitStar = (CCParticleSystem *)[CCBReader load:@"HitStar"];
-    hitStar.autoRemoveOnFinish = YES;
-    hitStar.position = star.position;
-    [star.parent addChild:hitStar];
-    [star removeFromParent];
-}
+
+// If the penguin hits the ground the game is over
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair penguin:(CCNode *)penguin level:(CCNode *)level{
     [self gameOver];
     OALSimpleAudio *crashAudio = [OALSimpleAudio sharedInstance];
     [crashAudio playEffect:@"crash.wav"];
     return YES;
 }
+// Each star hit adds to the point total
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair penguin:(CCNode *)penguin points:(CCNode *)points{
     CCParticleSystem *hitStar = (CCParticleSystem *)[CCBReader load:@"HitStar"];
     hitStar.autoRemoveOnFinish = YES;
@@ -69,9 +64,12 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     _pointLabel.string = [NSString stringWithFormat:@"%ld", (long)_points];
     NSLog(@"%ld", (long)_points);
     
+// Each 5 points collected increased the scroll speed by 1.2f the previous scroll speed
     if (_points == 5) {
         scrollSpeed = scrollSpeed * 1.2f;
+        [self winGame];
     }
+
     if (_points == 10) {
         scrollSpeed = scrollSpeed * 1.2f;
     }
@@ -112,6 +110,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
         scrollSpeed = scrollSpeed * 1.2f;
     }
     
+
     NSLog(@"%f", scrollSpeed);
     OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
     [audio playEffect:@"star.wav"];
@@ -166,11 +165,11 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
         float angularVelocity = clampf(_penguin.physicsBody.angularVelocity, -2.f, 1.f);
         _penguin.physicsBody.angularVelocity = angularVelocity;
     }
-    if ((_sinceTouch > 0.5f)) {
+    if ((_sinceTouch > 0.2f)) {
         [_penguin.physicsBody applyAngularImpulse:-10000.f*delta];
     }
     
-    
+    // Once a star is out of view another is added
     NSMutableArray *outOfViewStars = nil;
     for (CCNode *star in _stars) {
         CGPoint starWorldPosition = [_physicsNode convertToWorldSpace:star.position];
@@ -188,27 +187,37 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
         [self createNewStar];
     }
 }
+// Restarts the game
 - (void)restart{
     CCScene *scene = [CCBReader loadAsScene:@"MainScene"];
     [[CCDirector sharedDirector]replaceScene:scene];
 }
-
+// Pause screen for game
 - (void)pauseGame{
     NSLog(@"Game Paused");
-    
     CCScene *pauseScreen = [CCBReader loadAsScene:@"PauseScreen"];
     [self addChild:pauseScreen];
     [[CCDirector sharedDirector]pause];
     [bgAudio stopAllEffects];
 }
-
-
+//Show Win Screen if game is won
+- (void)winGame{
+    CCScene *winScreen = [CCBReader loadAsScene:@"WinScreen"];
+    [self addChild:winScreen];
+    [bgAudio stopAllEffects];
+    // Stops the penguin from falling
+    _penguin.physicsBody.type = CCPhysicsBodyTypeStatic;
+    _launchBtn.enabled = NO;
+    // Stops the penguin from collecting more stars
+    scrollSpeed = 0.f;
+}
 
 // If the penguin object hits the ground object, the game will end and all functions will stop
 - (void)gameOver{
     if (!_gameOver) {
         scrollSpeed = 0.f;
         _gameOver = YES;
+        _loseLabel.visible = YES;
         _restartBtn.visible = YES;
         _penguin.rotation = 90.f;
         _penguin.physicsBody.allowsRotation = NO;

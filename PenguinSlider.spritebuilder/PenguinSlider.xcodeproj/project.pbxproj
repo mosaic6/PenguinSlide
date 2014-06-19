@@ -14,6 +14,7 @@
 		619E99B41940EDAE00DC1A38 /* star.wav in Resources */ = {isa = PBXBuildFile; fileRef = 619E99B31940EDAE00DC1A38 /* star.wav */; };
 		619E99BA1940F12E00DC1A38 /* background_music.wav in Resources */ = {isa = PBXBuildFile; fileRef = 619E99B91940F12E00DC1A38 /* background_music.wav */; };
 		661020C7195124CA00C9C6ED /* PauseScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 661020C6195124CA00C9C6ED /* PauseScreen.m */; };
+		661020CB19523F1A00C9C6ED /* WinScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 661020CA19523F1A00C9C6ED /* WinScreen.m */; };
 		B71F5911188484E7003F4D28 /* iPad-old.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5907188484E7003F4D28 /* iPad-old.png */; };
 		B71F5912188484E7003F4D28 /* iPad-old@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5908188484E7003F4D28 /* iPad-old@2x.png */; };
 		B71F5913188484E7003F4D28 /* iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5909188484E7003F4D28 /* iPad.png */; };
@@ -72,6 +73,8 @@
 		619E99B91940F12E00DC1A38 /* background_music.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = background_music.wav; sourceTree = "<group>"; };
 		661020C5195124CA00C9C6ED /* PauseScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PauseScreen.h; sourceTree = "<group>"; };
 		661020C6195124CA00C9C6ED /* PauseScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PauseScreen.m; sourceTree = "<group>"; };
+		661020C919523F1A00C9C6ED /* WinScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WinScreen.h; sourceTree = "<group>"; };
+		661020CA19523F1A00C9C6ED /* WinScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WinScreen.m; sourceTree = "<group>"; };
 		B71F5907188484E7003F4D28 /* iPad-old.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPad-old.png"; path = "Icons/iPad-old.png"; sourceTree = "<group>"; };
 		B71F5908188484E7003F4D28 /* iPad-old@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPad-old@2x.png"; path = "Icons/iPad-old@2x.png"; sourceTree = "<group>"; };
 		B71F5909188484E7003F4D28 /* iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iPad.png; path = Icons/iPad.png; sourceTree = "<group>"; };
@@ -160,6 +163,8 @@
 				614799271948B53A005A3BE2 /* StarNode.m */,
 				661020C5195124CA00C9C6ED /* PauseScreen.h */,
 				661020C6195124CA00C9C6ED /* PauseScreen.m */,
+				661020C919523F1A00C9C6ED /* WinScreen.h */,
+				661020CA19523F1A00C9C6ED /* WinScreen.m */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -360,6 +365,7 @@
 				B737893F1807617C0076A88C /* AppDelegate.m in Sources */,
 				614799281948B53A005A3BE2 /* StarNode.m in Sources */,
 				661020C7195124CA00C9C6ED /* PauseScreen.m in Sources */,
+				661020CB19523F1A00C9C6ED /* WinScreen.m in Sources */,
 				B7378994180767190076A88C /* MainScene.m in Sources */,
 				6147992C1948C90F005A3BE2 /* StarPoint.m in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,

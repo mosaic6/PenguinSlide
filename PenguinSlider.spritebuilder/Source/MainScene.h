@@ -29,7 +29,7 @@
     CCLabelTTF *_pointLabel;
     
     CCButton *_launchBtn;
-    
+    CCLabelTTF *_loseLabel;
     CCButton *_restartBtn;
     BOOL _gameOver;
     

@@ -7,7 +7,7 @@
 //
 
 #import "PauseScreen.h"
-#import "AppDelegate.h"
+#import "MainScene.h"
 @implementation PauseScreen
 
 - (void)play{
@@ -16,7 +16,8 @@
     [bgAudio playEffect:@"background_music.wav" volume:0.6 pitch:1.0 pan:0.0 loop:YES];
     
     [self removeFromParent];
-    [[CCDirector sharedDirector]resume];
     
+    [[CCDirector sharedDirector]resume];
+
 }
 @end
