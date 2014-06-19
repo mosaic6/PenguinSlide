@@ -10,6 +10,7 @@
 #import "MainScene.h"
 @implementation WinScreen
 
+// Restarts the game
 - (void)playAgain{
     
     CCScene *scene = [CCBReader loadAsScene:@"MainScene"];

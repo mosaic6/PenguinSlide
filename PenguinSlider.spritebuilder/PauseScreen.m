@@ -10,6 +10,7 @@
 #import "MainScene.h"
 @implementation PauseScreen
 
+// Removes pause view from view and resumes main scene
 - (void)play{
     
     bgAudio = [OALSimpleAudio sharedInstance];

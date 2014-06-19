@@ -11,16 +11,18 @@
 @implementation StarNode
 #define ARC4RANDOM_MAX      0x100000000
 
+// Sets min and max height for stars to be set in view
 static const CGFloat minYPosition = 50.f;
-
 static const CGFloat maxYPosition = 320.f;
 
 
+// Sets a random place for stars in view
 - (void)setRandomPosition {
     CGFloat random = ((double)arc4random() / ARC4RANDOM_MAX);
     CGFloat range = maxYPosition - minYPosition;
     _star.position = ccp(_star.position.x, minYPosition + (random * range));
 }
+
 
 - (void)didLoadFromCCB{
     _star.physicsBody.collisionType = @"points";

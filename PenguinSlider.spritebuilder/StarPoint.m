@@ -10,6 +10,7 @@
 
 @implementation StarPoint
 
+// Collision for each star
 - (void)didLoadFromCCB {
     self.physicsBody.collisionType = @"points";
     self.physicsBody.sensor = TRUE;
