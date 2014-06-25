@@ -25,7 +25,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 - (void)didLoadFromCCB {
     
     bgAudio = [OALSimpleAudio sharedInstance];
-    [bgAudio playEffect:@"background_music.wav" volume:0.6 pitch:1.0 pan:0.0 loop:YES];
+    [bgAudio playEffect:@"background_music.wav" volume:0.2 pitch:1.0 pan:0.0 loop:YES];
     
     _grounds = @[_ground1, _ground2];
     self.userInteractionEnabled = YES;
@@ -50,7 +50,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair penguin:(CCNode *)penguin level:(CCNode *)level{
     [self gameOver];
     OALSimpleAudio *crashAudio = [OALSimpleAudio sharedInstance];
-    [crashAudio playEffect:@"crash.wav"];
+    [crashAudio playEffect:@"crash.wav" volume:1 pitch:1.0 pan:0.0 loop:NO];
     return YES;
 }
 // Each star hit adds to the point total
@@ -67,7 +67,6 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 // Each 5 points collected increased the scroll speed by 1.2f the previous scroll speed
     if (_points == 5) {
         scrollSpeed = scrollSpeed * 1.2f;
-        [self winGame];
     }
 
     if (_points == 10) {
@@ -108,12 +107,13 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     }
     if (_points == 100) {
         scrollSpeed = scrollSpeed * 1.2f;
+        [self winGame];
     }
     
 
     NSLog(@"%f", scrollSpeed);
     OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
-    [audio playEffect:@"star.wav"];
+    [audio playEffect:@"star.wav" volume:0.4 pitch:1.0 pan:0.0 loop:NO];
     
     return YES;
 }
@@ -134,7 +134,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 - (void)launchPenguin:(id)sender{
     
     OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
-    [audio playEffect:@"pressSound.wav" volume:0.3 pitch:1.0 pan:0.0 loop:NO];
+    [audio playEffect:@"pressSound.wav" volume:0.1 pitch:1.0 pan:0.0 loop:NO];
     
     if (!_gameOver) {
         [_penguin.physicsBody applyImpulse:ccp(0, 1000.f)];

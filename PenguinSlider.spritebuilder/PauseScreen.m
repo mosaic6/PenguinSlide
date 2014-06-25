@@ -21,4 +21,10 @@
     [[CCDirector sharedDirector]resume];
 
 }
+- (void)restartGame{
+    [self removeFromParent];
+    CCScene *scene = [CCBReader loadAsScene:@"MainScene"];
+    [[CCDirector sharedDirector]replaceScene:scene];
+    [[CCDirector sharedDirector]resume];
+}
 @end
