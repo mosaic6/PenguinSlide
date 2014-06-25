@@ -131,8 +131,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>baseClass</key>
@@ -1126,8 +1124,8 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>141</real>
-							<real>141.99996948242188</real>
+							<real>161</real>
+							<real>136.99996948242188</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -1164,7 +1162,9 @@
 						<string>Text</string>
 						<key>value</key>
 						<array>
-							<string>Music By: Joshua Walsh</string>
+							<string>Music By: Joshua Walsh
+Art By: Joshua Walsh
+Sound FXs By: Joshua Walsh</string>
 							<false/>
 						</array>
 					</dict>
@@ -1313,6 +1313,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>

@@ -27,4 +27,9 @@
     [[CCDirector sharedDirector]replaceScene:scene];
     [[CCDirector sharedDirector]resume];
 }
+- (void)showCredits{
+    CCScene *creditScene = [CCBReader loadAsScene:@"CreditScene"];
+    [self addChild:creditScene];
+    
+}
 @end
