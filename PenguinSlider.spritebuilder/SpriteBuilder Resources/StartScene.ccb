@@ -264,9 +264,9 @@
 				<key>displayName</key>
 				<string>CCButton</string>
 				<key>memberVarAssignmentName</key>
-				<string>_startBtn</string>
+				<string></string>
 				<key>memberVarAssignmentType</key>
-				<integer>1</integer>
+				<integer>0</integer>
 				<key>properties</key>
 				<array>
 					<dict>
@@ -561,6 +561,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>
@@ -633,8 +635,6 @@
 				</array>
 			</dict>
 		</array>
-		<key>selected</key>
-		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>
