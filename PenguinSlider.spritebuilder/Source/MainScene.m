@@ -211,7 +211,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     // Stops the penguin from collecting more stars
     scrollSpeed = 0.f;
 }
-
+//Add comment for git commit...
 // If the penguin object hits the ground object, the game will end and all functions will stop
 - (void)gameOver{
     if (!_gameOver) {

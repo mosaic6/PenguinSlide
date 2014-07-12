@@ -11,7 +11,6 @@
 @implementation CreditScene
 
 - (void)goBack{
-    [self removeFromParent];
-    
+    [self removeFromParent]; 
 }
 @end
