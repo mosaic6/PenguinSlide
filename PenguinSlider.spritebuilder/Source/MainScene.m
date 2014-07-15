@@ -8,25 +8,26 @@
 
 #import "MainScene.h"
 #import "StarNode.h"
+#import "SharkNode.h"
 #import "AppDelegate.h"
 
 static const CGFloat firstStarPosition = 500.f;
 static const CGFloat distanceBetweenStars = 195.f;
 
+static const CGFloat firstSharkPosition = 1500.f;
+static const CGFloat distanceBetweenSharks = 532.f;
+
 typedef NS_ENUM(NSInteger, DrawingOrder) {
     DrawingOrderStars,
     DrawingOrderGround,
-    DrawingOrderPenguin
+    DrawingOrderPenguin,
+    DrawingOrderShark
 };
 
 @implementation MainScene 
 
 
 - (void)didLoadFromCCB {
-    
-    bgAudio = [OALSimpleAudio sharedInstance];
-    [bgAudio playEffect:@"background_music.wav" volume:0.2 pitch:1.0 pan:0.0 loop:YES];
-    
     _grounds = @[_ground1, _ground2];
     self.userInteractionEnabled = YES;
     _physicsNode.collisionDelegate = self;
@@ -43,6 +44,12 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     [self createNewStar];
     [self createNewStar];
     
+    _sharks = [NSMutableArray array];
+    [self createNewShark];
+    [self createNewShark];
+    [self createNewShark];
+    
+    
     scrollSpeed = 100.f;
 }
 
@@ -51,6 +58,15 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     [self gameOver];
     OALSimpleAudio *crashAudio = [OALSimpleAudio sharedInstance];
     [crashAudio playEffect:@"crash.wav" volume:1 pitch:1.0 pan:0.0 loop:NO];
+    return YES;
+}
+- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair penguin:(CCNode *)penguin shark:(CCNode *)shark{
+    [shark removeFromParent];
+    _points--;
+    _points--;
+    _points--;
+    _pointLabel.string = [NSString stringWithFormat:@"%ld", (long)_points];
+    scrollSpeed = scrollSpeed / 1.2f;
     return YES;
 }
 // Each star hit adds to the point total
@@ -95,22 +111,9 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     }
     if (_points == 50) {
         scrollSpeed = scrollSpeed * 1.2f;
-    }
-    if (_points == 55) {
-        scrollSpeed = scrollSpeed * 1.2f;
-    }
-    if (_points == 60) {
-        scrollSpeed = scrollSpeed * 1.2f;
-    }
-    if (_points == 80) {
-        scrollSpeed = scrollSpeed * 1.2f;
-    }
-    if (_points == 100) {
-        scrollSpeed = scrollSpeed * 1.2f;
         [self winGame];
     }
     
-
     NSLog(@"%f", scrollSpeed);
     OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
     [audio playEffect:@"star.wav" volume:0.4 pitch:1.0 pan:0.0 loop:NO];
@@ -129,6 +132,20 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     [_physicsNode addChild:star];
     [_stars addObject:star];
     star.zOrder = DrawingOrderStars;
+}
+
+- (void)createNewShark{
+    CCNode *previousShark = [_sharks lastObject];
+    CGFloat previousSharkXPosition = previousShark.position.x;
+    if (!previousShark) {
+        previousSharkXPosition = firstSharkPosition;
+    }
+    SharkNode *shark = (SharkNode *)[CCBReader load:@"Shark"];
+    shark.position = ccp(previousSharkXPosition + distanceBetweenSharks, 0);
+    [shark setRandomPosition];
+    [_physicsNode addChild:shark];
+    [_sharks addObject:shark];
+    shark.zOrder = DrawingOrderShark;
 }
 
 - (void)launchPenguin:(id)sender{
@@ -185,6 +202,23 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
         [starToRemove removeFromParent];
         [_stars removeObject:starToRemove];
         [self createNewStar];
+    }
+    
+    NSMutableArray *outOfViewSharks = nil;
+    for (CCNode *shark in _sharks) {
+        CGPoint sharkWorldPosition = [_physicsNode convertToWorldSpace:shark.position];
+        CGPoint sharkScreenPosition = [self convertToNodeSpace:sharkWorldPosition];
+        if (sharkScreenPosition.x < -shark.contentSize.width) {
+            if (!outOfViewSharks) {
+                outOfViewSharks = [NSMutableArray array];
+            }
+            [outOfViewSharks addObject:shark];
+        }
+    }
+    for (CCNode *sharkToRemove in outOfViewSharks){
+        [sharkToRemove removeFromParent];
+        [_sharks removeObject:sharkToRemove];
+        [self createNewShark];
     }
 }
 // Restarts the game

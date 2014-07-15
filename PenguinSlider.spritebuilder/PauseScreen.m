@@ -14,7 +14,7 @@
 - (void)play{
     
     bgAudio = [OALSimpleAudio sharedInstance];
-    [bgAudio playEffect:@"background_music.wav" volume:0.6 pitch:1.0 pan:0.0 loop:YES];
+    [bgAudio playEffect:@"music.wav" volume:0.6 pitch:1.0 pan:0.0 loop:YES];
     
     [self removeFromParent];
     

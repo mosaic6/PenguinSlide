@@ -23,6 +23,7 @@
     
     NSArray *_grounds;
     NSMutableArray *_stars;
+    NSMutableArray *_sharks;
     NSTimeInterval _sinceTouch;
     
     NSInteger _points;
