@@ -25,9 +25,11 @@
 
 #import <UIKit/UIKit.h>
 #import "cocos2d.h"
-
+#import <GameKit/GameKit.h>
 @interface AppController : CCAppDelegate
 {
+    BOOL _gameCenterEnabled;
 }
+-(void)authenticateLocalPlayer;
 
 @end

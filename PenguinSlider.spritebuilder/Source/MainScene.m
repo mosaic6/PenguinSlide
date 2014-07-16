@@ -67,6 +67,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     _points--;
     _pointLabel.string = [NSString stringWithFormat:@"%ld", (long)_points];
     scrollSpeed = scrollSpeed / 1.2f;
+    [self bounce];
     return YES;
 }
 // Each star hit adds to the point total
@@ -258,11 +259,28 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
         [bgAudio stopAllEffects];
         [_penguin stopAllActions];
         _launchBtn.userInteractionEnabled = NO;
-        CCActionMoveBy *mb = [CCActionMoveBy actionWithDuration:0.3f position:ccp(-2, 2)];
-        CCActionInterval *reverseMove = [mb reverse];
-        CCActionSequence *as = [CCActionSequence actionWithArray:@[mb, reverseMove]];
-        CCActionEaseBounce *bounce = [CCActionEaseBounce actionWithAction:as];
-        [self runAction: bounce];
+        [self bounce];
+        
+        
     }
 }
+// Bounce action on contact with enemy or ground
+- (void)bounce{
+    CCActionMoveBy *mb = [CCActionMoveBy actionWithDuration:0.1f position:ccp(-4, 4)];
+    CCActionInterval *reverseMove = [mb reverse];
+    CCActionSequence *as = [CCActionSequence actionWithArray:@[mb, reverseMove]];
+    CCActionEaseBounce *bounce = [CCActionEaseBounce actionWithAction:as];
+    [self runAction: bounce];
+}
+
+//-(void)reportScore{
+//    GKScore *score = [[GKScore alloc] initWithLeaderboardIdentifier:_leaderboardIdentifier];
+//    score.value = _score;
+//    
+//    [GKScore reportScores:@[score] withCompletionHandler:^(NSError *error) {
+//        if (error != nil) {
+//            NSLog(@"%@", [error localizedDescription]);
+//        }
+//    }];
+//}
 @end

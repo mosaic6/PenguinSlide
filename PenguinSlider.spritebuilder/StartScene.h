@@ -7,9 +7,9 @@
 //
 
 #import "CCNode.h"
-
 @interface StartScene : CCNode
 {
     OALSimpleAudio *bgAudio;
 }
+
 @end

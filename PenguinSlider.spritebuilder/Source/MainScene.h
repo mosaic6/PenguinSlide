@@ -36,4 +36,6 @@
     
     CCButton *_pauseBtn;
 }
+
+- (void)reportScore;
 @end
