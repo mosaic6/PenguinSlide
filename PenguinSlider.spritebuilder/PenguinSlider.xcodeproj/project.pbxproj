@@ -42,6 +42,18 @@
 		61A884D5195B654B00126ABE /* CreditScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A884D4195B654B00126ABE /* CreditScene.m */; };
 		661020C7195124CA00C9C6ED /* PauseScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 661020C6195124CA00C9C6ED /* PauseScreen.m */; };
 		661020CB19523F1A00C9C6ED /* WinScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 661020CA19523F1A00C9C6ED /* WinScreen.m */; };
+		6691700B1974B14900C4E3AC /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6691700A1974B14900C4E3AC /* GLKit.framework */; };
+		669170101974B7C800C4E3AC /* SharkNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6691700F1974B7C800C4E3AC /* SharkNode.m */; };
+		669170131974BAD700C4E3AC /* HitShark.m in Sources */ = {isa = PBXBuildFile; fileRef = 669170121974BAD700C4E3AC /* HitShark.m */; };
+		669170171974C22000C4E3AC /* music.wav in Resources */ = {isa = PBXBuildFile; fileRef = 669170161974C22000C4E3AC /* music.wav */; };
+		6691702019760CA900C4E3AC /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6691701F19760CA900C4E3AC /* AdSupport.framework */; };
+		6691702619760CC600C4E3AC /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6691702519760CC600C4E3AC /* CFNetwork.framework */; };
+		6691702819760CDE00C4E3AC /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6691702719760CDE00C4E3AC /* libsqlite3.dylib */; };
+		6691702A19760CFD00C4E3AC /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6691702919760CFD00C4E3AC /* libz.dylib */; };
+		6691702C19760D0600C4E3AC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6691702B19760D0600C4E3AC /* CoreLocation.framework */; };
+		6691702E19760D0D00C4E3AC /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6691702D19760D0D00C4E3AC /* MobileCoreServices.framework */; };
+		6691703019760D1300C4E3AC /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6691702F19760D1300C4E3AC /* Security.framework */; };
+		6691703B1976159900C4E3AC /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6691703A1976159900C4E3AC /* GameKit.framework */; };
 		B737893B180761570076A88C /* Published-iOS in Resources */ = {isa = PBXBuildFile; fileRef = B737893A180761570076A88C /* Published-iOS */; };
 		B737893F1807617C0076A88C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B737893E1807617C0076A88C /* AppDelegate.m */; };
 		B73789871807631A0076A88C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B73789851807631A0076A88C /* main.m */; };
@@ -117,6 +129,25 @@
 		661020C6195124CA00C9C6ED /* PauseScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PauseScreen.m; sourceTree = "<group>"; };
 		661020C919523F1A00C9C6ED /* WinScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WinScreen.h; sourceTree = "<group>"; };
 		661020CA19523F1A00C9C6ED /* WinScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WinScreen.m; sourceTree = "<group>"; };
+		6691700A1974B14900C4E3AC /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		6691700E1974B7C800C4E3AC /* SharkNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharkNode.h; sourceTree = "<group>"; };
+		6691700F1974B7C800C4E3AC /* SharkNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SharkNode.m; sourceTree = "<group>"; };
+		669170111974BAD700C4E3AC /* HitShark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HitShark.h; sourceTree = "<group>"; };
+		669170121974BAD700C4E3AC /* HitShark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HitShark.m; sourceTree = "<group>"; };
+		669170161974C22000C4E3AC /* music.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = music.wav; sourceTree = "<group>"; };
+		6691701F19760CA900C4E3AC /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		6691702119760CAF00C4E3AC /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		6691702319760CB700C4E3AC /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		6691702519760CC600C4E3AC /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		6691702719760CDE00C4E3AC /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		6691702919760CFD00C4E3AC /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		6691702B19760D0600C4E3AC /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		6691702D19760D0D00C4E3AC /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		6691702F19760D1300C4E3AC /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		6691703119760D1B00C4E3AC /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		6691703319760D3000C4E3AC /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		6691703819760F5200C4E3AC /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		6691703A1976159900C4E3AC /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		B737893A180761570076A88C /* Published-iOS */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "Published-iOS"; path = "Source/Resources/Published-iOS"; sourceTree = SOURCE_ROOT; };
 		B737893D1807617C0076A88C /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Source/AppDelegate.h; sourceTree = "<group>"; };
 		B737893E1807617C0076A88C /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Source/AppDelegate.m; sourceTree = "<group>"; };
@@ -143,11 +174,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B737898A1807642B0076A88C /* libcocos2d.a in Frameworks */,
 				B77F1B3217B978D7009739AE /* QuartzCore.framework in Frameworks */,
+				6691703019760D1300C4E3AC /* Security.framework in Frameworks */,
+				6691702E19760D0D00C4E3AC /* MobileCoreServices.framework in Frameworks */,
+				6691702C19760D0600C4E3AC /* CoreLocation.framework in Frameworks */,
+				6691702A19760CFD00C4E3AC /* libz.dylib in Frameworks */,
+				6691702819760CDE00C4E3AC /* libsqlite3.dylib in Frameworks */,
+				6691702619760CC600C4E3AC /* CFNetwork.framework in Frameworks */,
+				B77F1B3817B978D7009739AE /* AudioToolbox.framework in Frameworks */,
+				6691702019760CA900C4E3AC /* AdSupport.framework in Frameworks */,
+				6691700B1974B14900C4E3AC /* GLKit.framework in Frameworks */,
+				B737898A1807642B0076A88C /* libcocos2d.a in Frameworks */,
 				B77F1B3417B978D7009739AE /* OpenGLES.framework in Frameworks */,
 				B77F1B3617B978D7009739AE /* OpenAL.framework in Frameworks */,
-				B77F1B3817B978D7009739AE /* AudioToolbox.framework in Frameworks */,
+				6691703B1976159900C4E3AC /* GameKit.framework in Frameworks */,
 				B77F1B3A17B978D7009739AE /* AVFoundation.framework in Frameworks */,
 				B77F1B3C17B978D7009739AE /* UIKit.framework in Frameworks */,
 				B77F1B3E17B978D7009739AE /* Foundation.framework in Frameworks */,
@@ -162,6 +202,7 @@
 		619E99AB193FFA3000DC1A38 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				669170161974C22000C4E3AC /* music.wav */,
 				6147992F19492EB5005A3BE2 /* crash.wav */,
 				619E99B31940EDAE00DC1A38 /* star.wav */,
 				619E99B91940F12E00DC1A38 /* background_music.wav */,
@@ -197,6 +238,10 @@
 				61A88492195B0BD900126ABE /* StartScene.m */,
 				61A884D3195B654B00126ABE /* CreditScene.h */,
 				61A884D4195B654B00126ABE /* CreditScene.m */,
+				6691700E1974B7C800C4E3AC /* SharkNode.h */,
+				6691700F1974B7C800C4E3AC /* SharkNode.m */,
+				669170111974BAD700C4E3AC /* HitShark.h */,
+				669170121974BAD700C4E3AC /* HitShark.m */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -264,6 +309,20 @@
 		B77F1B3017B978D7009739AE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6691703A1976159900C4E3AC /* GameKit.framework */,
+				6691703819760F5200C4E3AC /* FacebookSDK.framework */,
+				6691703319760D3000C4E3AC /* StoreKit.framework */,
+				6691703119760D1B00C4E3AC /* SystemConfiguration.framework */,
+				6691702F19760D1300C4E3AC /* Security.framework */,
+				6691702D19760D0D00C4E3AC /* MobileCoreServices.framework */,
+				6691702B19760D0600C4E3AC /* CoreLocation.framework */,
+				6691702919760CFD00C4E3AC /* libz.dylib */,
+				6691702719760CDE00C4E3AC /* libsqlite3.dylib */,
+				6691702519760CC600C4E3AC /* CFNetwork.framework */,
+				6691702319760CB700C4E3AC /* Accounts.framework */,
+				6691702119760CAF00C4E3AC /* Social.framework */,
+				6691701F19760CA900C4E3AC /* AdSupport.framework */,
+				6691700A1974B14900C4E3AC /* GLKit.framework */,
 				B7B3713D180358F1007369CC /* libObjectiveChipmunk.a */,
 				B77F1B3117B978D7009739AE /* QuartzCore.framework */,
 				B77F1B3317B978D7009739AE /* OpenGLES.framework */,
@@ -332,7 +391,7 @@
 						DevelopmentTeam = P624W8659J;
 						SystemCapabilities = {
 							com.apple.GameCenter = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
@@ -398,6 +457,7 @@
 				61A884AE195B500A00126ABE /* AppIcon60x60@2x.png in Resources */,
 				61A884B0195B500A00126ABE /* AppIcon72x72@2x.png in Resources */,
 				61A884AC195B500A00126ABE /* AppIcon57x57@2x.png in Resources */,
+				669170171974C22000C4E3AC /* music.wav in Resources */,
 				61A884B4195B500A00126ABE /* iTunesArtwork@2x.png in Resources */,
 				61A884D2195B635800126ABE /* Default~iphone.png in Resources */,
 				61A884CB195B635800126ABE /* Default-Landscape@2x~ipad.png in Resources */,
@@ -419,12 +479,14 @@
 				B737893F1807617C0076A88C /* AppDelegate.m in Sources */,
 				61A884D5195B654B00126ABE /* CreditScene.m in Sources */,
 				614799281948B53A005A3BE2 /* StarNode.m in Sources */,
+				669170101974B7C800C4E3AC /* SharkNode.m in Sources */,
 				661020C7195124CA00C9C6ED /* PauseScreen.m in Sources */,
 				61A88493195B0BD900126ABE /* StartScene.m in Sources */,
 				661020CB19523F1A00C9C6ED /* WinScreen.m in Sources */,
 				B7378994180767190076A88C /* MainScene.m in Sources */,
 				6147992C1948C90F005A3BE2 /* StarPoint.m in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,
+				669170131974BAD700C4E3AC /* HitShark.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -506,6 +568,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Source/Prefix.pch;
@@ -519,6 +585,10 @@
 				);
 				INFOPLIST_FILE = Source/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/PenguinSlider-fxddmmyszsjtukggnamebtsubqco/Build/Products/Debug-iphoneos",
+				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-lz",
@@ -539,6 +609,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Source/Prefix.pch;
 				HEADER_SEARCH_PATHS = (
@@ -551,6 +625,10 @@
 				);
 				INFOPLIST_FILE = Source/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/PenguinSlider-fxddmmyszsjtukggnamebtsubqco/Build/Products/Debug-iphoneos",
+				);
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-lsqlite3",

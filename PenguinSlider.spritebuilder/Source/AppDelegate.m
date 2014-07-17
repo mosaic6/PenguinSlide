@@ -54,15 +54,15 @@
     
     [self setupCocos2dWithOptions:cocos2dSetup];
     
-//    bgAudio = [OALSimpleAudio sharedInstance];
-//    [bgAudio playEffect:@"background_music.wav" volume:0.8 pitch:1.0 pan:0.0 loop:YES];
-    
     return YES;
 }
+
+
 
 - (CCScene*) startScene
 {
     return [CCBReader loadAsScene:@"StartScene"];
 }
+
 
 @end

@@ -8,24 +8,31 @@
 
 #import "MainScene.h"
 #import "StarNode.h"
+#import "SharkNode.h"
 #import "AppDelegate.h"
 
 static const CGFloat firstStarPosition = 500.f;
 static const CGFloat distanceBetweenStars = 195.f;
 
+static const CGFloat firstSharkPosition = 1500.f;
+static const CGFloat distanceBetweenSharks = 532.f;
+
 typedef NS_ENUM(NSInteger, DrawingOrder) {
     DrawingOrderStars,
     DrawingOrderGround,
-    DrawingOrderPenguin
+    DrawingOrderPenguin,
+    DrawingOrderShark
 };
 
 @implementation MainScene 
-
+@synthesize _points;
 
 - (void)didLoadFromCCB {
     
-    bgAudio = [OALSimpleAudio sharedInstance];
-    [bgAudio playEffect:@"background_music.wav" volume:0.2 pitch:1.0 pan:0.0 loop:YES];
+    [self authUser];
+    _gameCenterEnabled = NO;
+    _leaderboardIdentifier = @"";
+    _points = 0;
     
     _grounds = @[_ground1, _ground2];
     self.userInteractionEnabled = YES;
@@ -43,6 +50,12 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     [self createNewStar];
     [self createNewStar];
     
+    _sharks = [NSMutableArray array];
+    [self createNewShark];
+    [self createNewShark];
+    [self createNewShark];
+    
+    
     scrollSpeed = 100.f;
 }
 
@@ -51,6 +64,16 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     [self gameOver];
     OALSimpleAudio *crashAudio = [OALSimpleAudio sharedInstance];
     [crashAudio playEffect:@"crash.wav" volume:1 pitch:1.0 pan:0.0 loop:NO];
+    return YES;
+}
+- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair penguin:(CCNode *)penguin shark:(CCNode *)shark{
+    [shark removeFromParent];
+    _points--;
+    _points--;
+    _points--;
+    _pointLabel.string = [NSString stringWithFormat:@"%ld", (long)_points];
+    scrollSpeed = scrollSpeed / 1.2f;
+    [self bounce];
     return YES;
 }
 // Each star hit adds to the point total
@@ -95,22 +118,9 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     }
     if (_points == 50) {
         scrollSpeed = scrollSpeed * 1.2f;
-    }
-    if (_points == 55) {
-        scrollSpeed = scrollSpeed * 1.2f;
-    }
-    if (_points == 60) {
-        scrollSpeed = scrollSpeed * 1.2f;
-    }
-    if (_points == 80) {
-        scrollSpeed = scrollSpeed * 1.2f;
-    }
-    if (_points == 100) {
-        scrollSpeed = scrollSpeed * 1.2f;
         [self winGame];
     }
     
-
     NSLog(@"%f", scrollSpeed);
     OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
     [audio playEffect:@"star.wav" volume:0.4 pitch:1.0 pan:0.0 loop:NO];
@@ -129,6 +139,20 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     [_physicsNode addChild:star];
     [_stars addObject:star];
     star.zOrder = DrawingOrderStars;
+}
+
+- (void)createNewShark{
+    CCNode *previousShark = [_sharks lastObject];
+    CGFloat previousSharkXPosition = previousShark.position.x;
+    if (!previousShark) {
+        previousSharkXPosition = firstSharkPosition;
+    }
+    SharkNode *shark = (SharkNode *)[CCBReader load:@"Shark"];
+    shark.position = ccp(previousSharkXPosition + distanceBetweenSharks, 0);
+    [shark setRandomPosition];
+    [_physicsNode addChild:shark];
+    [_sharks addObject:shark];
+    shark.zOrder = DrawingOrderShark;
 }
 
 - (void)launchPenguin:(id)sender{
@@ -186,11 +210,32 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
         [_stars removeObject:starToRemove];
         [self createNewStar];
     }
+    
+    NSMutableArray *outOfViewSharks = nil;
+    for (CCNode *shark in _sharks) {
+        CGPoint sharkWorldPosition = [_physicsNode convertToWorldSpace:shark.position];
+        CGPoint sharkScreenPosition = [self convertToNodeSpace:sharkWorldPosition];
+        if (sharkScreenPosition.x < -shark.contentSize.width) {
+            if (!outOfViewSharks) {
+                outOfViewSharks = [NSMutableArray array];
+            }
+            [outOfViewSharks addObject:shark];
+        }
+    }
+    for (CCNode *sharkToRemove in outOfViewSharks){
+        [sharkToRemove removeFromParent];
+        [_sharks removeObject:sharkToRemove];
+        [self createNewShark];
+    }
 }
 // Restarts the game
 - (void)restart{
     CCScene *scene = [CCBReader loadAsScene:@"MainScene"];
     [[CCDirector sharedDirector]replaceScene:scene];
+}
+// Report your score for the leaderboard
+- (void)reportScore{
+    [self showLeaderboardAndAchievements:YES];
 }
 // Pause screen for game
 - (void)pauseGame{
@@ -219,16 +264,100 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
         _gameOver = YES;
         _loseLabel.visible = YES;
         _restartBtn.visible = YES;
+        _reportScoreBtn.visible = YES;
         _penguin.rotation = 90.f;
         _penguin.physicsBody.allowsRotation = NO;
         [bgAudio stopAllEffects];
         [_penguin stopAllActions];
         _launchBtn.userInteractionEnabled = NO;
-        CCActionMoveBy *mb = [CCActionMoveBy actionWithDuration:0.3f position:ccp(-2, 2)];
-        CCActionInterval *reverseMove = [mb reverse];
-        CCActionSequence *as = [CCActionSequence actionWithArray:@[mb, reverseMove]];
-        CCActionEaseBounce *bounce = [CCActionEaseBounce actionWithAction:as];
-        [self runAction: bounce];
+        [self reportHighScore];
+        [self bounce];
+        
+        
     }
 }
+// Bounce action on contact with enemy or ground
+- (void)bounce{
+    CCActionMoveBy *mb = [CCActionMoveBy actionWithDuration:0.1f position:ccp(-4, 4)];
+    CCActionInterval *reverseMove = [mb reverse];
+    CCActionSequence *as = [CCActionSequence actionWithArray:@[mb, reverseMove]];
+    CCActionEaseBounce *bounce = [CCActionEaseBounce actionWithAction:as];
+    [self runAction: bounce];
+}
+
+- (void)authUser{
+    GKGameCenterViewController *gameCenterViewController = [[GKGameCenterViewController alloc]init];
+    if (gameCenterViewController != nil) {
+        gameCenterViewController.gameCenterDelegate = self;
+        
+        GKLocalPlayer *localPlayer = [GKLocalPlayer localPlayer];
+        [localPlayer authenticateWithCompletionHandler:^(NSError *error) {
+            if (localPlayer.isAuthenticated)
+            {
+                [[CCDirector sharedDirector]addChildViewController:gameCenterViewController];
+            }
+        }];
+        
+    }
+    if ([GKLocalPlayer localPlayer].authenticated) {
+        // If the player is already authenticated then indicate that the Game Center features can be used.
+        _gameCenterEnabled = YES;
+        
+        // Get the default leaderboard identifier.
+        [[GKLocalPlayer localPlayer] loadDefaultLeaderboardIdentifierWithCompletionHandler:^(NSString *leaderboardIdentifier, NSError *error) {
+            
+            if (error != nil) {
+                NSLog(@"%@", [error localizedDescription]);
+            }
+            else{
+                _leaderboardIdentifier = leaderboardIdentifier;
+            }
+        }];
+    }
+    
+    else{
+        _gameCenterEnabled = NO;
+    }
+    
+    NSLog(@"HIT");
+}
+
+
+-(void)reportHighScore{
+    GKScore *score = [[GKScore alloc] initWithLeaderboardIdentifier:@"PenguinSliderLeaderboard"];
+    score.value = _points;
+    score.context = 0;
+    [GKScore reportScores:@[score] withCompletionHandler:^(NSError *error) {
+        if (error != nil) {
+            NSLog(@"%@", [error localizedDescription]);
+        }
+    }];
+}
+- (void)showLeaderboardAndAchievements:(BOOL)shouldShowLeaderboard{
+    // Init the following view controller object.
+    GKGameCenterViewController *gcViewController = [[GKGameCenterViewController alloc] init];
+    
+    // Set self as its delegate.
+    gcViewController.gameCenterDelegate = self;
+    
+    // Depending on the parameter, show either the leaderboard or the achievements.
+    if (shouldShowLeaderboard) {
+        gcViewController.viewState = GKGameCenterViewControllerStateLeaderboards;
+        gcViewController.leaderboardIdentifier = _leaderboardIdentifier;
+    }
+    else{
+        gcViewController.viewState = GKGameCenterViewControllerStateAchievements;
+    }
+    
+    // Finally present the view controller.
+    [[CCDirector sharedDirector]addChildViewController:gcViewController];
+}
+
+#pragma mark - GKGameCenterControllerDelegate method implementation
+
+-(void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController
+{
+    [gameCenterViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
 @end

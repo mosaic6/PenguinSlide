@@ -7,8 +7,8 @@
 //
 
 #import "CCNode.h"
-
-@interface MainScene : CCNode <CCPhysicsCollisionDelegate>
+#import <GameKit/GameKit.h>
+@interface MainScene : CCNode <CCPhysicsCollisionDelegate, GKGameCenterControllerDelegate>
 {
     OALSimpleAudio *bgAudio;
     
@@ -23,16 +23,23 @@
     
     NSArray *_grounds;
     NSMutableArray *_stars;
+    NSMutableArray *_sharks;
     NSTimeInterval _sinceTouch;
     
-    NSInteger _points;
+    int64_t _points;
     CCLabelTTF *_pointLabel;
     
     CCButton *_launchBtn;
     CCLabelTTF *_loseLabel;
     CCButton *_restartBtn;
+    CCButton *_reportScoreBtn;
     BOOL _gameOver;
     
     CCButton *_pauseBtn;
 }
+@property (nonatomic) BOOL gameCenterEnabled;
+@property (nonatomic) int64_t _points;
+@property (nonatomic, strong) NSString *leaderboardIdentifier;
+- (void)reportScore;
+
 @end
