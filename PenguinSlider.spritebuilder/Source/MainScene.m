@@ -235,6 +235,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 }
 // Report your score for the leaderboard
 - (void)reportScore{
+    [self reportHighScore];
     [self showLeaderboardAndAchievements:YES];
 }
 // Pause screen for game
@@ -295,6 +296,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
             if (localPlayer.isAuthenticated)
             {
                 [[CCDirector sharedDirector]addChildViewController:gameCenterViewController];
+                NSLog(@"%@", localPlayer);
             }
         }];
         
@@ -337,6 +339,12 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     // Init the following view controller object.
     GKGameCenterViewController *gcViewController = [[GKGameCenterViewController alloc] init];
     
+    if (gcViewController != nil) {
+        gcViewController.gameCenterDelegate = self;
+        gcViewController.viewState = GKGameCenterViewControllerStateLeaderboards;
+        gcViewController.leaderboardTimeScope = GKLeaderboardTimeScopeAllTime;
+    }
+    
     // Set self as its delegate.
     gcViewController.gameCenterDelegate = self;
     
@@ -349,8 +357,9 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
         gcViewController.viewState = GKGameCenterViewControllerStateAchievements;
     }
     
+    
     // Finally present the view controller.
-    [[CCDirector sharedDirector]addChildViewController:gcViewController];
+    [[CCDirectorIOS sharedDirector]presentModalViewController:gcViewController animated:YES];
 }
 
 #pragma mark - GKGameCenterControllerDelegate method implementation
