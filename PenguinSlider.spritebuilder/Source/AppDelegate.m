@@ -53,40 +53,11 @@
     //[cocos2dSetup setObject:kEAGLColorFormatRGB565 forKey:CCConfigPixelFormat];
     
     [self setupCocos2dWithOptions:cocos2dSetup];
-    [self authenticateLocalPlayer];
     
     return YES;
 }
 
--(void)authenticateLocalPlayer{
-    GKLocalPlayer *localPlayer = [GKLocalPlayer localPlayer];
-//    GameCenterViewController *gcViewController;
-    localPlayer.authenticateHandler = ^(UIViewController *viewController, NSError *error){
-        if (viewController != nil) {
-//            [self presentViewController:viewController animated:YES completion:nil];
-//            [viewController presentModalViewController:gcViewController animated:YES];
-        }
-        else{
-            if ([GKLocalPlayer localPlayer].authenticated) {
-                _gameCenterEnabled = YES;
-                
-                // Get the default leaderboard identifier.
-                [[GKLocalPlayer localPlayer] loadDefaultLeaderboardIdentifierWithCompletionHandler:^(NSString *leaderboardIdentifier, NSError *error) {
-                    
-                    if (error != nil) {
-                        NSLog(@"%@", [error localizedDescription]);
-                    }
-                    else{
-                        leaderboardIdentifier = leaderboardIdentifier;
-                    }
-                }];
-            }
-            else{
-                _gameCenterEnabled = NO;
-            }
-        }
-    };
-}
+
 
 - (CCScene*) startScene
 {

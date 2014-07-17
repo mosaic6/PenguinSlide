@@ -25,9 +25,15 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 };
 
 @implementation MainScene 
-
+@synthesize _points;
 
 - (void)didLoadFromCCB {
+    
+    [self authUser];
+    _gameCenterEnabled = NO;
+    _leaderboardIdentifier = @"";
+    _points = 0;
+    
     _grounds = @[_ground1, _ground2];
     self.userInteractionEnabled = YES;
     _physicsNode.collisionDelegate = self;
@@ -227,6 +233,10 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     CCScene *scene = [CCBReader loadAsScene:@"MainScene"];
     [[CCDirector sharedDirector]replaceScene:scene];
 }
+// Report your score for the leaderboard
+- (void)reportScore{
+    [self showLeaderboardAndAchievements:YES];
+}
 // Pause screen for game
 - (void)pauseGame{
     NSLog(@"Game Paused");
@@ -254,11 +264,13 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
         _gameOver = YES;
         _loseLabel.visible = YES;
         _restartBtn.visible = YES;
+        _reportScoreBtn.visible = YES;
         _penguin.rotation = 90.f;
         _penguin.physicsBody.allowsRotation = NO;
         [bgAudio stopAllEffects];
         [_penguin stopAllActions];
         _launchBtn.userInteractionEnabled = NO;
+        [self reportHighScore];
         [self bounce];
         
         
@@ -273,14 +285,79 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     [self runAction: bounce];
 }
 
-//-(void)reportScore{
-//    GKScore *score = [[GKScore alloc] initWithLeaderboardIdentifier:_leaderboardIdentifier];
-//    score.value = _score;
-//    
-//    [GKScore reportScores:@[score] withCompletionHandler:^(NSError *error) {
-//        if (error != nil) {
-//            NSLog(@"%@", [error localizedDescription]);
-//        }
-//    }];
-//}
+- (void)authUser{
+    GKGameCenterViewController *gameCenterViewController = [[GKGameCenterViewController alloc]init];
+    if (gameCenterViewController != nil) {
+        gameCenterViewController.gameCenterDelegate = self;
+        
+        GKLocalPlayer *localPlayer = [GKLocalPlayer localPlayer];
+        [localPlayer authenticateWithCompletionHandler:^(NSError *error) {
+            if (localPlayer.isAuthenticated)
+            {
+                [[CCDirector sharedDirector]addChildViewController:gameCenterViewController];
+            }
+        }];
+        
+    }
+    if ([GKLocalPlayer localPlayer].authenticated) {
+        // If the player is already authenticated then indicate that the Game Center features can be used.
+        _gameCenterEnabled = YES;
+        
+        // Get the default leaderboard identifier.
+        [[GKLocalPlayer localPlayer] loadDefaultLeaderboardIdentifierWithCompletionHandler:^(NSString *leaderboardIdentifier, NSError *error) {
+            
+            if (error != nil) {
+                NSLog(@"%@", [error localizedDescription]);
+            }
+            else{
+                _leaderboardIdentifier = leaderboardIdentifier;
+            }
+        }];
+    }
+    
+    else{
+        _gameCenterEnabled = NO;
+    }
+    
+    NSLog(@"HIT");
+}
+
+
+-(void)reportHighScore{
+    GKScore *score = [[GKScore alloc] initWithLeaderboardIdentifier:@"PenguinSliderLeaderboard"];
+    score.value = _points;
+    score.context = 0;
+    [GKScore reportScores:@[score] withCompletionHandler:^(NSError *error) {
+        if (error != nil) {
+            NSLog(@"%@", [error localizedDescription]);
+        }
+    }];
+}
+- (void)showLeaderboardAndAchievements:(BOOL)shouldShowLeaderboard{
+    // Init the following view controller object.
+    GKGameCenterViewController *gcViewController = [[GKGameCenterViewController alloc] init];
+    
+    // Set self as its delegate.
+    gcViewController.gameCenterDelegate = self;
+    
+    // Depending on the parameter, show either the leaderboard or the achievements.
+    if (shouldShowLeaderboard) {
+        gcViewController.viewState = GKGameCenterViewControllerStateLeaderboards;
+        gcViewController.leaderboardIdentifier = _leaderboardIdentifier;
+    }
+    else{
+        gcViewController.viewState = GKGameCenterViewControllerStateAchievements;
+    }
+    
+    // Finally present the view controller.
+    [[CCDirector sharedDirector]addChildViewController:gcViewController];
+}
+
+#pragma mark - GKGameCenterControllerDelegate method implementation
+
+-(void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController
+{
+    [gameCenterViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
 @end

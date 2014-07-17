@@ -11,7 +11,6 @@
 @implementation StartScene
 
 - (void)didLoadFromCCB {
-    
     bgAudio = [OALSimpleAudio sharedInstance];
     [bgAudio playEffect:@"music.wav" volume:0.4 pitch:1.0 pan:0.0 loop:YES];
     
@@ -21,12 +20,14 @@
     [self removeFromParent];
     CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
     [[CCDirector sharedDirector]replaceScene:mainScene];
-    [[CCDirector sharedDirector]resume];
+//    [[CCDirector sharedDirector]pause];
 }
 - (void)showCredits{
     CCScene *creditScene = [CCBReader loadAsScene:@"CreditScene"];
     [self addChild:creditScene];
     
 }
+
+
 
 @end

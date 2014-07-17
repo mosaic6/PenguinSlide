@@ -27,4 +27,7 @@
     [[CCDirector sharedDirector]replaceScene:scene];
     [[CCDirector sharedDirector]resume];
 }
+- (void)showHighScores{
+    NSLog(@"High Scores");
+}
 @end
