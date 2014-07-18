@@ -28,6 +28,33 @@
     [[CCDirector sharedDirector]resume];
 }
 - (void)showHighScores{
-    NSLog(@"High Scores");
+    [self showLeaderboardAndAchievements:YES];
+}
+
+- (void)showLeaderboardAndAchievements:(BOOL)shouldShowLeaderboard{
+    // Init the following view controller object.
+    GKGameCenterViewController *gcViewController = [[GKGameCenterViewController alloc] init];
+    
+    // Set self as its delegate.
+    gcViewController.gameCenterDelegate = self;
+    
+    // Depending on the parameter, show either the leaderboard or the achievements.
+    if (shouldShowLeaderboard) {
+        gcViewController.viewState = GKGameCenterViewControllerStateLeaderboards;
+        gcViewController.leaderboardIdentifier = _leaderboardIdentifier;
+    }
+    else{
+        gcViewController.viewState = GKGameCenterViewControllerStateAchievements;
+    }
+    
+    // Finally present the view controller.
+    [[CCDirector sharedDirector]addChildViewController:gcViewController];
+}
+
+#pragma mark - GKGameCenterControllerDelegate method implementation
+
+-(void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController
+{
+    [gameCenterViewController dismissViewControllerAnimated:YES completion:nil];
 }
 @end

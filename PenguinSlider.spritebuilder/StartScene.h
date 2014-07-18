@@ -7,8 +7,7 @@
 //
 
 #import "CCNode.h"
-#import <GameKit/GameKit.h>
-@interface StartScene : CCNode <GKGameCenterControllerDelegate>
+@interface StartScene : CCNode
 {
     OALSimpleAudio *bgAudio;
 }

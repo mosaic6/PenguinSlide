@@ -4,14 +4,27 @@
 <dict>
 	<key>frames</key>
 	<dict>
-		<key>Sprites/button_03.png</key>
+		<key>Sprites/bear_03.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{1, 89}, {63, 65}}</string>
+			<string>{{1, 89}, {276, 138}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>
 			<false/>
+			<key>sourceColorRect</key>
+			<string>{{0, 0}, {276, 138}}</string>
+			<key>sourceSize</key>
+			<string>{276, 138}</string>
+		</dict>
+		<key>Sprites/button_03.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{272, 255}, {63, 65}}</string>
+			<key>offset</key>
+			<string>{0, 0}</string>
+			<key>rotated</key>
+			<true/>
 			<key>sourceColorRect</key>
 			<string>{{3, 1}, {63, 65}}</string>
 			<key>sourceSize</key>
@@ -20,7 +33,7 @@
 		<key>Sprites/jaw_10.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{457, 126}, {35, 13}}</string>
+			<string>{{1, 229}, {35, 13}}</string>
 			<key>offset</key>
 			<string>{0, 0}</string>
 			<key>rotated</key>

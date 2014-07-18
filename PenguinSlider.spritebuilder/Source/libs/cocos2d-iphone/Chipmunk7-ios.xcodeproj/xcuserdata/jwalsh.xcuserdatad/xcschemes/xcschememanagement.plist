@@ -4,15 +4,15 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>PenguinSlider.xcscheme_^#shared#^_</key>
+		<key>ObjectiveChipmunk-iPhone.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>3</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>B77F1B2D17B978D7009739AE</key>
+		<key>D309B21217EFE2EF00AA52C8</key>
 		<dict>
 			<key>primary</key>
 			<true/>

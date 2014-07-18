@@ -7,11 +7,14 @@
 //
 
 #import "CCNode.h"
-
-@interface PauseScreen : CCNode
+#import <GameKit/GameKit.h>
+@interface PauseScreen : CCNode <GKGameCenterControllerDelegate>
 {
     CCButton *_playBtn;
     
     OALSimpleAudio *bgAudio;
 }
+@property (nonatomic) BOOL gameCenterEnabled;
+@property (nonatomic) int64_t _points;
+@property (nonatomic, strong) NSString *leaderboardIdentifier;
 @end

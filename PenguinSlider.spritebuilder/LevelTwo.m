@@ -1,15 +1,16 @@
 //
-//  MainScene.m
-//  PROJECTNAME
+//  LevelTwo.m
+//  PenguinSlider
 //
-//  Created by Viktor on 10/10/13.
-//  Copyright (c) 2013 Apportable. All rights reserved.
+//  Created by Joshua Walsh on 7/17/14.
+//  Copyright (c) 2014 Apportable. All rights reserved.
 //
 
-#import "MainScene.h"
+#import "LevelTwo.h"
 #import "StarNode.h"
 #import "SharkNode.h"
 #import "AppDelegate.h"
+#import "BearNode.h"
 
 static const CGFloat firstStarPosition = 500.f;
 static const CGFloat distanceBetweenStars = 195.f;
@@ -17,14 +18,18 @@ static const CGFloat distanceBetweenStars = 195.f;
 static const CGFloat firstSharkPosition = 1500.f;
 static const CGFloat distanceBetweenSharks = 532.f;
 
+static const CGFloat firstBearPosition = 1500.f;
+static const CGFloat distanceBetweenBears = 1832.f;
+
 typedef NS_ENUM(NSInteger, DrawingOrder) {
     DrawingOrderStars,
     DrawingOrderGround,
     DrawingOrderPenguin,
-    DrawingOrderShark
+    DrawingOrderShark,
+    DrawingOrderBear
 };
 
-@implementation MainScene 
+@implementation LevelTwo
 @synthesize _points;
 
 - (void)didLoadFromCCB {
@@ -34,7 +39,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     _leaderboardIdentifier = @"";
     _points = 0;
     
-    _grounds = @[_ground1, _ground2];
+    _grounds = @[_ground3, _ground4];
     self.userInteractionEnabled = YES;
     _physicsNode.collisionDelegate = self;
     
@@ -55,6 +60,9 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     [self createNewShark];
     [self createNewShark];
     
+    _bears = [NSMutableArray array];
+    [self createNewBear];
+    [self createNewBear];
     
     scrollSpeed = 100.f;
 }
@@ -66,8 +74,8 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     [crashAudio playEffect:@"crash.wav" volume:1 pitch:1.0 pan:0.0 loop:NO];
     return YES;
 }
-- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair penguin:(CCNode *)penguin shark:(CCNode *)shark{
-    [shark removeFromParent];
+- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair penguin:(CCNode *)penguin bear:(CCNode *)bear{
+    [bear removeFromParent];
     _points--;
     _points--;
     _points--;
@@ -87,11 +95,11 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     _pointLabel.string = [NSString stringWithFormat:@"%ld", (long)_points];
     NSLog(@"%ld", (long)_points);
     
-// Each 5 points collected increased the scroll speed by 1.2f the previous scroll speed
+    // Each 5 points collected increased the scroll speed by 1.2f the previous scroll speed
     if (_points == 5) {
         scrollSpeed = scrollSpeed * 1.2f;
     }
-
+    
     if (_points == 10) {
         scrollSpeed = scrollSpeed * 1.2f;
     }
@@ -127,6 +135,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     
     return YES;
 }
+
 - (void)createNewStar{
     CCNode *previousStar = [_stars lastObject];
     CGFloat previousStarXPosition = previousStar.position.x;
@@ -155,6 +164,20 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     shark.zOrder = DrawingOrderShark;
 }
 
+- (void)createNewBear{
+    CCNode *previousBear = [_bears lastObject];
+    CGFloat previousBearXPosition = previousBear.position.x;
+    if (!previousBear) {
+        previousBearXPosition = firstBearPosition;
+    }
+    BearNode *bear = (BearNode *)[CCBReader load:@"BearNode"];
+    bear.position = ccp(previousBearXPosition + distanceBetweenBears, 0);
+    [bear setRandomPosition];
+    [_physicsNode addChild:bear];
+    [_bears addObject:bear];
+    bear.zOrder = DrawingOrderBear;
+}
+                        
 - (void)launchPenguin:(id)sender{
     
     OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
@@ -211,6 +234,23 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
         [self createNewStar];
     }
     
+    NSMutableArray *outOfViewBears = nil;
+    for (CCNode *bear in _bears) {
+        CGPoint bearWorldPosition = [_physicsNode convertToWorldSpace:bear.position];
+        CGPoint bearScreenPosition = [self convertToNodeSpace:bearWorldPosition];
+        if (bearScreenPosition.x < -bear.contentSize.width) {
+            if (!outOfViewBears) {
+                outOfViewBears = [NSMutableArray array];
+            }
+            [outOfViewBears addObject:bear];
+        }
+    }
+    for (CCNode *bearToRemove in outOfViewBears){
+        [bearToRemove removeFromParent];
+        [_bears removeObject:bearToRemove];
+        [self createNewBear];
+    }
+    
     NSMutableArray *outOfViewSharks = nil;
     for (CCNode *shark in _sharks) {
         CGPoint sharkWorldPosition = [_physicsNode convertToWorldSpace:shark.position];
@@ -228,6 +268,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
         [self createNewShark];
     }
 }
+
 // Restarts the game
 - (void)restart{
     CCScene *scene = [CCBReader loadAsScene:@"MainScene"];
@@ -247,7 +288,6 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 }
 //Show Win Screen if game is won
 - (void)winGame{
-    [self reportHighScore];
     CCScene *winScreen = [CCBReader loadAsScene:@"WinScreen"];
     [self addChild:winScreen];
     [bgAudio stopAllEffects];
@@ -273,6 +313,8 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
         _launchBtn.userInteractionEnabled = NO;
         [self reportHighScore];
         [self bounce];
+        
+        
     }
 }
 // Bounce action on contact with enemy or ground
@@ -358,5 +400,6 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 {
     [gameCenterViewController dismissViewControllerAnimated:YES completion:nil];
 }
+
 
 @end

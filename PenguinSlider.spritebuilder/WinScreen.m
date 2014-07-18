@@ -8,6 +8,7 @@
 
 #import "WinScreen.h"
 #import "MainScene.h"
+#import "LevelTwo.h"
 @implementation WinScreen
 
 // Restarts the game
@@ -17,5 +18,11 @@
     [[CCDirector sharedDirector]replaceScene:scene];
     
     [self removeFromParent];    
+}
+- (void)nextLevel{
+    CCScene *levelTwo = [CCBReader loadAsScene:@"LevelTwo"];
+    [[CCDirector sharedDirector]replaceScene:levelTwo];
+    
+    [self removeFromParent];
 }
 @end

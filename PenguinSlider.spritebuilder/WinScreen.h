@@ -11,6 +11,7 @@
 @interface WinScreen : CCNode
 {
     CCButton *_playAgainBtn;
+    CCButton *_nextLevelBtn;
     OALSimpleAudio *bgAudio;
 }
 @end

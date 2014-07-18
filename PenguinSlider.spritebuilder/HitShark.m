@@ -9,7 +9,7 @@
 #import "HitShark.h"
 
 @implementation HitShark
-// Collision for each star
+// Collision for each shark
 - (void)didLoadFromCCB {
     self.physicsBody.collisionType = @"shark";
     self.physicsBody.sensor = TRUE;

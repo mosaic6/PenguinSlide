@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		61091C6819785DE600CC5AD1 /* HitBear.m in Sources */ = {isa = PBXBuildFile; fileRef = 61091C6719785DE600CC5AD1 /* HitBear.m */; };
+		61091C6C19785DF200CC5AD1 /* BearNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 61091C6B19785DF200CC5AD1 /* BearNode.m */; };
+		61091C6F19785E1D00CC5AD1 /* LevelTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 61091C6E19785E1D00CC5AD1 /* LevelTwo.m */; };
 		614799281948B53A005A3BE2 /* StarNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 614799271948B53A005A3BE2 /* StarNode.m */; };
 		6147992C1948C90F005A3BE2 /* StarPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 6147992B1948C90F005A3BE2 /* StarPoint.m */; };
 		6147993019492EB5005A3BE2 /* crash.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6147992F19492EB5005A3BE2 /* crash.wav */; };
@@ -88,6 +91,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		61091C6619785DE600CC5AD1 /* HitBear.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HitBear.h; sourceTree = "<group>"; };
+		61091C6719785DE600CC5AD1 /* HitBear.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HitBear.m; sourceTree = "<group>"; };
+		61091C6A19785DF200CC5AD1 /* BearNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BearNode.h; sourceTree = "<group>"; };
+		61091C6B19785DF200CC5AD1 /* BearNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BearNode.m; sourceTree = "<group>"; };
+		61091C6D19785E1D00CC5AD1 /* LevelTwo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelTwo.h; sourceTree = "<group>"; };
+		61091C6E19785E1D00CC5AD1 /* LevelTwo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelTwo.m; sourceTree = "<group>"; };
 		614799261948B53A005A3BE2 /* StarNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StarNode.h; sourceTree = "<group>"; };
 		614799271948B53A005A3BE2 /* StarNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StarNode.m; sourceTree = "<group>"; };
 		6147992A1948C90F005A3BE2 /* StarPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StarPoint.h; sourceTree = "<group>"; };
@@ -242,6 +251,12 @@
 				6691700F1974B7C800C4E3AC /* SharkNode.m */,
 				669170111974BAD700C4E3AC /* HitShark.h */,
 				669170121974BAD700C4E3AC /* HitShark.m */,
+				61091C6619785DE600CC5AD1 /* HitBear.h */,
+				61091C6719785DE600CC5AD1 /* HitBear.m */,
+				61091C6A19785DF200CC5AD1 /* BearNode.h */,
+				61091C6B19785DF200CC5AD1 /* BearNode.m */,
+				61091C6D19785E1D00CC5AD1 /* LevelTwo.h */,
+				61091C6E19785E1D00CC5AD1 /* LevelTwo.m */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -479,7 +494,9 @@
 				B737893F1807617C0076A88C /* AppDelegate.m in Sources */,
 				61A884D5195B654B00126ABE /* CreditScene.m in Sources */,
 				614799281948B53A005A3BE2 /* StarNode.m in Sources */,
+				61091C6F19785E1D00CC5AD1 /* LevelTwo.m in Sources */,
 				669170101974B7C800C4E3AC /* SharkNode.m in Sources */,
+				61091C6C19785DF200CC5AD1 /* BearNode.m in Sources */,
 				661020C7195124CA00C9C6ED /* PauseScreen.m in Sources */,
 				61A88493195B0BD900126ABE /* StartScene.m in Sources */,
 				661020CB19523F1A00C9C6ED /* WinScreen.m in Sources */,
@@ -487,6 +504,7 @@
 				6147992C1948C90F005A3BE2 /* StarPoint.m in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,
 				669170131974BAD700C4E3AC /* HitShark.m in Sources */,
+				61091C6819785DE600CC5AD1 /* HitBear.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
