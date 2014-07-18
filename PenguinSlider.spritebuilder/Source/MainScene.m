@@ -71,8 +71,14 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     _points--;
     _points--;
     _points--;
+    
     _pointLabel.string = [NSString stringWithFormat:@"%ld", (long)_points];
     scrollSpeed = scrollSpeed / 1.2f;
+    
+    if (_points <= 0) {
+        [self gameOver];
+    }
+    
     [self bounce];
     return YES;
 }
@@ -120,6 +126,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
         scrollSpeed = scrollSpeed * 1.2f;
         [self winGame];
     }
+
     
     NSLog(@"%f", scrollSpeed);
     OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
@@ -235,6 +242,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 }
 // Report your score for the leaderboard
 - (void)reportScore{
+    [self reportHighScore];
     [self showLeaderboardAndAchievements:YES];
 }
 // Pause screen for game
@@ -284,6 +292,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     [self runAction: bounce];
 }
 
+// Authenticate the user for the Game Center
 - (void)authUser{
     GKGameCenterViewController *gameCenterViewController = [[GKGameCenterViewController alloc]init];
     if (gameCenterViewController != nil) {
@@ -321,17 +330,18 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     NSLog(@"HIT");
 }
 
-
+// Report the score to the Game Center
 -(void)reportHighScore{
     GKScore *score = [[GKScore alloc] initWithLeaderboardIdentifier:@"PenguinSliderLeaderboard"];
     score.value = _points;
-    score.context = 0;
+//    score.context = 0;
     [GKScore reportScores:@[score] withCompletionHandler:^(NSError *error) {
         if (error != nil) {
             NSLog(@"%@", [error localizedDescription]);
         }
     }];
 }
+// Show the Game Center Leaderboard
 - (void)showLeaderboardAndAchievements:(BOOL)shouldShowLeaderboard{
     // Init the following view controller object.
     GKGameCenterViewController *gcViewController = [[GKGameCenterViewController alloc] init];
@@ -352,8 +362,9 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     [[CCDirector sharedDirector]addChildViewController:gcViewController];
 }
 
-#pragma mark - GKGameCenterControllerDelegate method implementation
 
+#pragma mark - GKGameCenterControllerDelegate method implementation
+// Dismiss the Game Center
 -(void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController
 {
     [gameCenterViewController dismissViewControllerAnimated:YES completion:nil];

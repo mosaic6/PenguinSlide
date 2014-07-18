@@ -74,13 +74,37 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     [crashAudio playEffect:@"crash.wav" volume:1 pitch:1.0 pan:0.0 loop:NO];
     return YES;
 }
+
+- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair penguin:(CCNode *)penguin shark:(CCNode *)shark{
+    [shark removeFromParent];
+    _points--;
+    _points--;
+    _points--;
+    
+    _pointLabel.string = [NSString stringWithFormat:@"%ld", (long)_points];
+    scrollSpeed = scrollSpeed / 1.2f;
+    
+    if (_points <= 0) {
+        [self gameOver];
+    }
+    
+    [self bounce];
+    return YES;
+}
+
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair penguin:(CCNode *)penguin bear:(CCNode *)bear{
     [bear removeFromParent];
     _points--;
     _points--;
     _points--;
+    _points--;
     _pointLabel.string = [NSString stringWithFormat:@"%ld", (long)_points];
     scrollSpeed = scrollSpeed / 1.2f;
+    
+    if (_points <= 0) {
+        [self gameOver];
+    }
+    
     [self bounce];
     return YES;
 }
@@ -363,7 +387,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     NSLog(@"HIT");
 }
 
-
+// Report the high score
 -(void)reportHighScore{
     GKScore *score = [[GKScore alloc] initWithLeaderboardIdentifier:@"PenguinSliderLeaderboard"];
     score.value = _points;
@@ -374,6 +398,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
         }
     }];
 }
+// Show Game Center leaderboard
 - (void)showLeaderboardAndAchievements:(BOOL)shouldShowLeaderboard{
     // Init the following view controller object.
     GKGameCenterViewController *gcViewController = [[GKGameCenterViewController alloc] init];
