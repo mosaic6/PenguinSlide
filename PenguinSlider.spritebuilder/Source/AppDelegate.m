@@ -53,10 +53,71 @@
     //[cocos2dSetup setObject:kEAGLColorFormatRGB565 forKey:CCConfigPixelFormat];
     
     [self setupCocos2dWithOptions:cocos2dSetup];
-    
+    [self authUser];
     return YES;
 }
 
+
+// Authenticate the user for the Game Center
+- (void)authUser{
+    GKGameCenterViewController *gameCenterViewController = [[GKGameCenterViewController alloc]init];
+    if (gameCenterViewController != nil) {
+        gameCenterViewController.gameCenterDelegate = self;
+        
+        GKLocalPlayer *localPlayer = [GKLocalPlayer localPlayer];
+        [localPlayer authenticateWithCompletionHandler:^(NSError *error) {
+            if (localPlayer.isAuthenticated)
+            {
+                [[CCDirector sharedDirector]addChildViewController:gameCenterViewController];
+            }
+        }];
+        
+    }
+    if ([GKLocalPlayer localPlayer].authenticated) {
+        // If the player is already authenticated then indicate that the Game Center features can be used.
+        _gameCenterEnabled = YES;
+        
+        // Get the default leaderboard identifier.
+        [[GKLocalPlayer localPlayer] loadDefaultLeaderboardIdentifierWithCompletionHandler:^(NSString *leaderboardIdentifier, NSError *error) {
+            
+            if (error != nil) {
+                NSLog(@"%@", [error localizedDescription]);
+            }
+            else{
+                _leaderboardIdentifier = leaderboardIdentifier;
+            }
+        }];
+    }
+    
+    else{
+        _gameCenterEnabled = NO;
+    }
+    
+    NSLog(@"HIT");
+}
+- (void)authenticationChanged {
+    
+    if ([GKLocalPlayer localPlayer].isAuthenticated && !userAuthenticated) {
+        
+        NSLog(@"Authentication changed: player authenticated.");
+        
+        userAuthenticated = TRUE;
+        
+        
+        
+        // Load the leaderboard info
+        
+        // Load the achievements
+        
+    } else if (![GKLocalPlayer localPlayer].isAuthenticated && userAuthenticated) {
+        
+        NSLog(@"Authentication changed: player not authenticated.");
+        
+        userAuthenticated = FALSE;
+        
+    }
+    
+}
 
 
 - (CCScene*) startScene

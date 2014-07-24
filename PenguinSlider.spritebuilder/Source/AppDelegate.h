@@ -25,6 +25,11 @@
 
 #import <UIKit/UIKit.h>
 #import "cocos2d.h"
-@interface AppController : CCAppDelegate
-
+#import <GameKit/GameKit.h>
+@interface AppController : CCAppDelegate <GKGameCenterControllerDelegate>
+{
+    BOOL userAuthenticated;
+}
+@property (nonatomic) BOOL gameCenterEnabled;
+@property (nonatomic, strong) NSString *leaderboardIdentifier;
 @end

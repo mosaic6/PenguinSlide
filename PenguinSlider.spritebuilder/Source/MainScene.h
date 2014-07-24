@@ -34,6 +34,7 @@
     CCButton *_restartBtn;
     CCButton *_reportScoreBtn;
     BOOL _gameOver;
+    BOOL userAuthenticated;
     
     CCButton *_pauseBtn;
 }

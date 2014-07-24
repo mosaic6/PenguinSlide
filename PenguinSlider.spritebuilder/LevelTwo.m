@@ -37,7 +37,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     [self authUser];
     _gameCenterEnabled = NO;
     _leaderboardIdentifier = @"";
-    _points = 0;
+    _points = 50;
     
     _grounds = @[_ground3, _ground4];
     self.userInteractionEnabled = YES;

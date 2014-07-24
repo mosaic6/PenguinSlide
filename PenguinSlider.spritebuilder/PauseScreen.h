@@ -13,6 +13,15 @@
     CCButton *_playBtn;
     
     OALSimpleAudio *bgAudio;
+    
+    CCLabelTTF *_playerScore;
+    CCLabelTTF *_playerNames;
+    NSMutableArray *leaderboardPointsID;
+    NSMutableArray *leaderboardPointsSaved;
+    
+    
+    
+    BOOL userAuthenticated;
 }
 @property (nonatomic) BOOL gameCenterEnabled;
 @property (nonatomic) int64_t _points;

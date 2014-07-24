@@ -8,8 +8,15 @@
 
 #import "PauseScreen.h"
 #import "MainScene.h"
-@implementation PauseScreen
 
+@implementation PauseScreen
+{
+    GKLeaderboardViewController *leaderboardVC;
+}
+- (void)didLoadFromCCB {
+    _leaderboardIdentifier = @"";
+    [self retrieveTopTenScores];
+}
 // Removes pause view from view and resumes main scene
 - (void)play{
     
@@ -28,8 +35,17 @@
     [[CCDirector sharedDirector]resume];
 }
 - (void)showHighScores{
-    [self showLeaderboardAndAchievements:YES];
+    [self retrieveTopTenScores];
+    leaderboardVC = [[GKLeaderboardViewController alloc]init];
+    leaderboardVC.delegate = NULL;
+    if(leaderboardVC != NULL){
+        leaderboardVC.category = self.leaderboardIdentifier;
+        leaderboardVC.timeScope = GKLeaderboardTimeScopeAllTime;
+        [[CCDirector sharedDirector]presentViewController:leaderboardVC animated:YES completion:nil];
+    }
+    
 }
+
 
 - (void)showLeaderboardAndAchievements:(BOOL)shouldShowLeaderboard{
     // Init the following view controller object.
@@ -51,10 +67,71 @@
     [[CCDirector sharedDirector]addChildViewController:gcViewController];
 }
 
-#pragma mark - GKGameCenterControllerDelegate method implementation
 
+- (void) retrieveTopTenScores
+{
+    leaderboardPointsID = [[NSMutableArray alloc]init];
+    leaderboardPointsSaved = [[NSMutableArray alloc]init];
+    GKLeaderboard *leaderboardRequest = [[GKLeaderboard alloc] init];
+    NSString *alias = [GKLocalPlayer localPlayer].alias;
+    NSString *name = [GKLocalPlayer localPlayer].displayName;
+    if (leaderboardRequest != nil)
+    {
+        leaderboardRequest.playerScope = GKLeaderboardPlayerScopeGlobal;
+        leaderboardRequest.timeScope = GKLeaderboardTimeScopeToday;
+        leaderboardRequest.identifier = @"PenguinSliderLeaderboard";
+        leaderboardRequest.range = NSMakeRange(1,10);
+        [leaderboardRequest loadScoresWithCompletionHandler: ^(NSArray *scores, NSError *error) {
+            NSArray *playerIDs = [scores valueForKey:@"playerID"];
+            [GKPlayer loadPlayersForIdentifiers:playerIDs withCompletionHandler:^(NSArray *players, NSError *error) {
+                NSLog(@"About to parse the leaderboardPointsID: Contains %@", leaderboardPointsID);
+                for (NSString *playerIDFromLB in leaderboardPointsID) {
+                    for (GKScore *player in scores) {
+                        
+                        if ([playerIDFromLB isEqualToString:player.playerID]) {
+                            [leaderboardPointsSaved addObject:[NSString stringWithFormat:@"%lld", player.value]];
+                            [leaderboardPointsSaved addObject:[NSString stringWithFormat:@"%@", player]];
+                            NSLog(@"done: added player to array for: %@", player.playerID);
+                            _playerScore.string = scores[0];
+                            
+                        }
+                    }
+                    for (GKLeaderboard *board in scores) {
+                        board.playerScope = GKLeaderboardPlayerScopeGlobal;
+                        board.timeScope = GKLeaderboardTimeScopeAllTime;
+                        NSRange range = {.location = 1, .length = 1};
+                        board.range = range;
+                        [board loadScoresWithCompletionHandler:^(NSArray *scores, NSError *error) {
+                            NSLog(@"Your score is %lld", board.localPlayerScore.value);
+                        }];
+                    }
+                }
+            }];
+            if (error != nil)
+            {
+                NSLog(@"get leaderboard score") ;
+                return ;
+            }
+            if (scores != nil)
+            {
+                NSLog(@"%@", leaderboardRequest.identifier);
+                NSLog(@"%@", alias);
+                NSLog(@"%@", name);
+                
+                _playerNames.string = name;
+            }
+        }];
+    }
+}
+
+
+
+#pragma mark - GKGameCenterControllerDelegate method implementation
+// Dismiss the Game Center
 -(void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController
 {
-    [gameCenterViewController dismissViewControllerAnimated:YES completion:nil];
+//    [gameCenterViewController dismissViewControllerAnimated:YES completion:nil];
+    [gameCenterViewController removeFromParentViewController];
 }
+
 @end

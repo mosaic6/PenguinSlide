@@ -29,7 +29,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 
 - (void)didLoadFromCCB {
     
-    [self authUser];
+    
     _gameCenterEnabled = NO;
     _leaderboardIdentifier = @"";
     _points = 0;
@@ -97,7 +97,6 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     if (_points == 5) {
         scrollSpeed = scrollSpeed * 1.2f;
     }
-
     if (_points == 10) {
         scrollSpeed = scrollSpeed * 1.2f;
     }
@@ -134,6 +133,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     
     return YES;
 }
+// Create new star
 - (void)createNewStar{
     CCNode *previousStar = [_stars lastObject];
     CGFloat previousStarXPosition = previousStar.position.x;
@@ -292,49 +292,11 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     [self runAction: bounce];
 }
 
-// Authenticate the user for the Game Center
-- (void)authUser{
-    GKGameCenterViewController *gameCenterViewController = [[GKGameCenterViewController alloc]init];
-    if (gameCenterViewController != nil) {
-        gameCenterViewController.gameCenterDelegate = self;
-        
-        GKLocalPlayer *localPlayer = [GKLocalPlayer localPlayer];
-        [localPlayer authenticateWithCompletionHandler:^(NSError *error) {
-            if (localPlayer.isAuthenticated)
-            {
-                [[CCDirector sharedDirector]addChildViewController:gameCenterViewController];
-            }
-        }];
-        
-    }
-    if ([GKLocalPlayer localPlayer].authenticated) {
-        // If the player is already authenticated then indicate that the Game Center features can be used.
-        _gameCenterEnabled = YES;
-        
-        // Get the default leaderboard identifier.
-        [[GKLocalPlayer localPlayer] loadDefaultLeaderboardIdentifierWithCompletionHandler:^(NSString *leaderboardIdentifier, NSError *error) {
-            
-            if (error != nil) {
-                NSLog(@"%@", [error localizedDescription]);
-            }
-            else{
-                _leaderboardIdentifier = leaderboardIdentifier;
-            }
-        }];
-    }
-    
-    else{
-        _gameCenterEnabled = NO;
-    }
-    
-    NSLog(@"HIT");
-}
-
 // Report the score to the Game Center
 -(void)reportHighScore{
     GKScore *score = [[GKScore alloc] initWithLeaderboardIdentifier:@"PenguinSliderLeaderboard"];
     score.value = _points;
-//    score.context = 0;
+
     [GKScore reportScores:@[score] withCompletionHandler:^(NSError *error) {
         if (error != nil) {
             NSLog(@"%@", [error localizedDescription]);
@@ -359,7 +321,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     }
     
     // Finally present the view controller.
-    [[CCDirector sharedDirector]addChildViewController:gcViewController];
+    [[CCDirector sharedDirector]presentViewController:gcViewController animated:YES completion:nil];
 }
 
 
