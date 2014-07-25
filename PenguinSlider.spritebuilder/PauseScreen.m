@@ -81,18 +81,22 @@
         leaderboardRequest.timeScope = GKLeaderboardTimeScopeToday;
         leaderboardRequest.identifier = @"PenguinSliderLeaderboard";
         leaderboardRequest.range = NSMakeRange(1,10);
+        
         [leaderboardRequest loadScoresWithCompletionHandler: ^(NSArray *scores, NSError *error) {
+            
             NSArray *playerIDs = [scores valueForKey:@"playerID"];
             [GKPlayer loadPlayersForIdentifiers:playerIDs withCompletionHandler:^(NSArray *players, NSError *error) {
                 NSLog(@"About to parse the leaderboardPointsID: Contains %@", leaderboardPointsID);
                 for (NSString *playerIDFromLB in leaderboardPointsID) {
                     for (GKScore *player in scores) {
-                        
+                        NSString *_value = [NSString stringWithFormat:@"%@", player.formattedValue];
+                        _playerScore.string = _value;
                         if ([playerIDFromLB isEqualToString:player.playerID]) {
                             [leaderboardPointsSaved addObject:[NSString stringWithFormat:@"%lld", player.value]];
                             [leaderboardPointsSaved addObject:[NSString stringWithFormat:@"%@", player]];
                             NSLog(@"done: added player to array for: %@", player.playerID);
-                            _playerScore.string = scores[0];
+                            NSLog(@"%@", playerIDFromLB);
+                            
                             
                         }
                     }
@@ -114,10 +118,13 @@
             }
             if (scores != nil)
             {
+                NSLog(@"%@", leaderboardRequest.scores);
                 NSLog(@"%@", leaderboardRequest.identifier);
                 NSLog(@"%@", alias);
                 NSLog(@"%@", name);
-                
+                GKScore *sc = [[GKScore alloc]init];
+                NSString *_value = [NSString stringWithFormat:@"%@", sc.formattedValue];
+                _playerScore.string = _value;
                 _playerNames.string = name;
             }
         }];
@@ -130,8 +137,9 @@
 // Dismiss the Game Center
 -(void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController
 {
-//    [gameCenterViewController dismissViewControllerAnimated:YES completion:nil];
-    [gameCenterViewController removeFromParentViewController];
+    [gameCenterViewController dismissViewControllerAnimated:YES completion:nil];
+//    [gameCenterViewController removeFromParentViewController];
 }
+
 
 @end
