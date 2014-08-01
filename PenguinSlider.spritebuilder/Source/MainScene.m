@@ -30,7 +30,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 - (void)didLoadFromCCB {
     
     
-    _gameCenterEnabled = NO;
+    _gameCenterEnabled = YES;
     _leaderboardIdentifier = @"";
     _points = 0;
     
@@ -174,8 +174,8 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     [audio playEffect:@"pressSound.wav" volume:0.1 pitch:1.0 pan:0.0 loop:NO];
     
     if (!_gameOver) {
-        [_penguin.physicsBody applyImpulse:ccp(0, 1000.f)];
-        [_penguin.physicsBody applyAngularImpulse:50000.f];
+        [_penguin.physicsBody applyImpulse:ccp(0, 1500.f)];
+        [_penguin.physicsBody applyAngularImpulse:10000.f];
         _sinceTouch = 0.f;
     }
     
@@ -193,11 +193,11 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
         }
     }
     
-    float yVelocity = clampf(_penguin.physicsBody.velocity.y, -1 * MAXFLOAT, 250.f);
+    float yVelocity = clampf(_penguin.physicsBody.velocity.y, -1 * MAXFLOAT, 150.f);
     _penguin.physicsBody.velocity = ccp(0, yVelocity);
     
     _sinceTouch += delta;
-    _penguin.rotation = clampf(_penguin.rotation, -10.f, 20.f);
+    _penguin.rotation = clampf(_penguin.rotation, -10.f, 30.f);
     if (_penguin.physicsBody.allowsRotation) {
         float angularVelocity = clampf(_penguin.physicsBody.angularVelocity, -2.f, 1.f);
         _penguin.physicsBody.angularVelocity = angularVelocity;
@@ -309,6 +309,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
         }
     }];
 }
+
 // Show the Game Center Leaderboard
 - (void)showLeaderboardAndAchievements:(BOOL)shouldShowLeaderboard{
     // Init the following view controller object.

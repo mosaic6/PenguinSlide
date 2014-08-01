@@ -16,6 +16,8 @@
     
     CCLabelTTF *_playerScore;
     CCLabelTTF *_playerNames;
+    CCLabelTTF *_playerTwo;
+    CCLabelTTF *_playerTwoRank;
     NSMutableArray *leaderboardPointsID;
     NSMutableArray *leaderboardPointsSaved;
     

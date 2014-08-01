@@ -72,8 +72,10 @@
     leaderboardPointsID = [[NSMutableArray alloc]init];
     leaderboardPointsSaved = [[NSMutableArray alloc]init];
     GKLeaderboard *leaderboardRequest = [[GKLeaderboard alloc] init];
+    
     NSString *alias = [GKLocalPlayer localPlayer].alias;
     NSString *name = [GKLocalPlayer localPlayer].displayName;
+    
     if (leaderboardRequest != nil)
     {
         leaderboardRequest.playerScope = GKLeaderboardPlayerScopeGlobal;
@@ -82,7 +84,6 @@
         leaderboardRequest.range = NSMakeRange(1,10);
         
         [leaderboardRequest loadScoresWithCompletionHandler: ^(NSArray *scores, NSError *error) {
-            
             if (error != nil)
             {
                 NSLog(@"Can't get leaderboard score") ;
@@ -92,13 +93,11 @@
             if (scores != nil)
             {
                 
-                NSLog(@"%@", leaderboardRequest.scores);
-                NSLog(@"%@", leaderboardRequest.identifier);
-                NSLog(@"%@", alias);
-                NSLog(@"%@", name);
-                NSLog(@"%@", scores);
+                NSLog(@"Your leaderboard scores are: %@", leaderboardRequest.scores);
+                NSLog(@"Leaderboard identifier: %@", leaderboardRequest.identifier);
+                NSLog(@"Player alias: %@", alias);
+                NSLog(@"Player name: %@", name);
                 GKScore *myScore = leaderboardRequest.localPlayerScore;
-
 
                 _playerScore.string = [NSString stringWithFormat:@"%ld",myScore.rank];
                 _playerNames.string = name;

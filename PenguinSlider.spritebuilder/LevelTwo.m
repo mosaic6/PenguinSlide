@@ -34,7 +34,6 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 
 - (void)didLoadFromCCB {
     
-    [self authUser];
     _gameCenterEnabled = NO;
     _leaderboardIdentifier = @"";
     _points = 50;
@@ -64,7 +63,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     [self createNewBear];
     [self createNewBear];
     
-    scrollSpeed = 100.f;
+    scrollSpeed = 10.f;
 }
 
 // If the penguin hits the ground the game is over
@@ -138,13 +137,10 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
         GKAchievement *seventyFive = [[GKAchievement alloc]initWithIdentifier:@"PenguinSlider75PointAchievement"];
         [self sendAchievement:seventyFive];
         _achieveLabel.string = @"Hey nice work!";
-        [UIView animateWithDuration:1 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            _achieveLabel.opacity = 0;
-            _achieveLabel.visible = YES;
-            [UIView animateWithDuration:1 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                _achieveLabel.opacity = 1;
-            } completion:nil];
-        } completion:nil];
+        _achieveLabel.visible = YES;
+    }
+    if (_points == 76) {
+        _achieveLabel.visible = NO;
     }
     if (_points == 80) {
         scrollSpeed = scrollSpeed * 1.2f;
@@ -164,13 +160,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
         GKAchievement *hundred = [[GKAchievement alloc]initWithIdentifier:@"PenguinSlider100PointAchievement"];
         [self sendAchievement:hundred];
         _achieveLabel.string = @"Holy moly you did it!";
-        [UIView animateWithDuration:1 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            _achieveLabel.opacity = 0;
-            _achieveLabel.visible = YES;
-            [UIView animateWithDuration:1 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                _achieveLabel.opacity = 1;
-            } completion:nil];
-        } completion:nil];
+        _achieveLabel.visible = YES;
     }
     
     NSLog(@"%f", scrollSpeed);
@@ -228,7 +218,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     [audio playEffect:@"pressSound.wav" volume:0.1 pitch:1.0 pan:0.0 loop:NO];
     
     if (!_gameOver) {
-        [_penguin.physicsBody applyImpulse:ccp(0, 1000.f)];
+        [_penguin.physicsBody applyImpulse:ccp(0, 1500.f)];
         [_penguin.physicsBody applyAngularImpulse:50000.f];
         _sinceTouch = 0.f;
     }
@@ -247,11 +237,11 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
         }
     }
     
-    float yVelocity = clampf(_penguin.physicsBody.velocity.y, -1 * MAXFLOAT, 250.f);
+    float yVelocity = clampf(_penguin.physicsBody.velocity.y, -1 * MAXFLOAT, 550.f);
     _penguin.physicsBody.velocity = ccp(0, yVelocity);
     
     _sinceTouch += delta;
-    _penguin.rotation = clampf(_penguin.rotation, -10.f, 20.f);
+    _penguin.rotation = clampf(_penguin.rotation, -10.f, 30.f);
     if (_penguin.physicsBody.allowsRotation) {
         float angularVelocity = clampf(_penguin.physicsBody.angularVelocity, -2.f, 1.f);
         _penguin.physicsBody.angularVelocity = angularVelocity;
@@ -320,6 +310,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 }
 // Report your score for the leaderboard
 - (void)reportScore{
+    [self reportHighScore];
     [self showLeaderboardAndAchievements:YES];
 }
 // Pause screen for game
@@ -358,7 +349,6 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
         [self reportHighScore];
         [self bounce];
         
-        
     }
 }
 // Bounce action on contact with enemy or ground
@@ -369,56 +359,19 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     CCActionEaseBounce *bounce = [CCActionEaseBounce actionWithAction:as];
     [self runAction: bounce];
 }
-
-- (void)authUser{
-    GKGameCenterViewController *gameCenterViewController = [[GKGameCenterViewController alloc]init];
-    if (gameCenterViewController != nil) {
-        gameCenterViewController.gameCenterDelegate = self;
-        
-        GKLocalPlayer *localPlayer = [GKLocalPlayer localPlayer];
-        [localPlayer authenticateWithCompletionHandler:^(NSError *error) {
-            if (localPlayer.isAuthenticated)
-            {
-                [[CCDirector sharedDirector]addChildViewController:gameCenterViewController];
-            }
-        }];
-        
-    }
-    if ([GKLocalPlayer localPlayer].authenticated) {
-        // If the player is already authenticated then indicate that the Game Center features can be used.
-        _gameCenterEnabled = YES;
-        
-        // Get the default leaderboard identifier.
-        [[GKLocalPlayer localPlayer] loadDefaultLeaderboardIdentifierWithCompletionHandler:^(NSString *leaderboardIdentifier, NSError *error) {
-            
-            if (error != nil) {
-                NSLog(@"%@", [error localizedDescription]);
-            }
-            else{
-                _leaderboardIdentifier = leaderboardIdentifier;
-            }
-        }];
-    }
-    
-    else{
-        _gameCenterEnabled = NO;
-    }
-    
-    NSLog(@"HIT");
-}
-
-// Report the high score
+// Report the score to the Game Center
 -(void)reportHighScore{
     GKScore *score = [[GKScore alloc] initWithLeaderboardIdentifier:@"PenguinSliderLeaderboard"];
     score.value = _points;
-    score.context = 0;
+    
     [GKScore reportScores:@[score] withCompletionHandler:^(NSError *error) {
         if (error != nil) {
             NSLog(@"%@", [error localizedDescription]);
         }
     }];
 }
-// Show Game Center leaderboard
+
+// Show the Game Center Leaderboard
 - (void)showLeaderboardAndAchievements:(BOOL)shouldShowLeaderboard{
     // Init the following view controller object.
     GKGameCenterViewController *gcViewController = [[GKGameCenterViewController alloc] init];
@@ -436,8 +389,9 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     }
     
     // Finally present the view controller.
-    [[CCDirector sharedDirector]addChildViewController:gcViewController];
+    [[CCDirector sharedDirector]presentViewController:gcViewController animated:YES completion:nil];
 }
+
 - (void)sendAchievement:(GKAchievement *)achievement{
     achievement.percentComplete = 100.0;
     achievement.showsCompletionBanner = YES;
@@ -451,13 +405,6 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
             }
         });
     }];
-}
-
-#pragma mark - GKGameCenterControllerDelegate method implementation
-
--(void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController
-{
-    [gameCenterViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 
