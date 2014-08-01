@@ -120,37 +120,57 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     NSLog(@"%ld", (long)_points);
     
     // Each 5 points collected increased the scroll speed by 1.2f the previous scroll speed
-    if (_points == 5) {
+    if (_points == 55) {
         scrollSpeed = scrollSpeed * 1.2f;
     }
     
-    if (_points == 10) {
+    if (_points == 60) {
         scrollSpeed = scrollSpeed * 1.2f;
     }
-    if (_points == 15) {
+    if (_points == 65) {
         scrollSpeed = scrollSpeed * 1.2f;
     }
-    if (_points == 20) {
+    if (_points == 70) {
         scrollSpeed = scrollSpeed * 1.2f;
     }
-    if (_points == 25) {
+    if (_points == 75) {
+        scrollSpeed = scrollSpeed * 1.2f;
+        GKAchievement *seventyFive = [[GKAchievement alloc]initWithIdentifier:@"PenguinSlider75PointAchievement"];
+        [self sendAchievement:seventyFive];
+        _achieveLabel.string = @"Hey nice work!";
+        [UIView animateWithDuration:1 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            _achieveLabel.opacity = 0;
+            _achieveLabel.visible = YES;
+            [UIView animateWithDuration:1 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                _achieveLabel.opacity = 1;
+            } completion:nil];
+        } completion:nil];
+    }
+    if (_points == 80) {
         scrollSpeed = scrollSpeed * 1.2f;
     }
-    if (_points == 30) {
+    if (_points == 85) {
         scrollSpeed = scrollSpeed * 1.2f;
     }
-    if (_points == 35) {
+    if (_points == 90) {
         scrollSpeed = scrollSpeed * 1.2f;
     }
-    if (_points == 40) {
+    if (_points == 95) {
         scrollSpeed = scrollSpeed * 1.2f;
     }
-    if (_points == 45) {
-        scrollSpeed = scrollSpeed * 1.2f;
-    }
-    if (_points == 50) {
+    if (_points == 100) {
         scrollSpeed = scrollSpeed * 1.2f;
         [self winGame];
+        GKAchievement *hundred = [[GKAchievement alloc]initWithIdentifier:@"PenguinSlider100PointAchievement"];
+        [self sendAchievement:hundred];
+        _achieveLabel.string = @"Holy moly you did it!";
+        [UIView animateWithDuration:1 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            _achieveLabel.opacity = 0;
+            _achieveLabel.visible = YES;
+            [UIView animateWithDuration:1 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                _achieveLabel.opacity = 1;
+            } completion:nil];
+        } completion:nil];
     }
     
     NSLog(@"%f", scrollSpeed);
@@ -417,6 +437,20 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     
     // Finally present the view controller.
     [[CCDirector sharedDirector]addChildViewController:gcViewController];
+}
+- (void)sendAchievement:(GKAchievement *)achievement{
+    achievement.percentComplete = 100.0;
+    achievement.showsCompletionBanner = YES;
+    
+    [achievement reportAchievementWithCompletionHandler:^(NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^(void){
+            if (error  == nil) {
+                NSLog(@"Success! Achievement Sent");
+            } else {
+                NSLog(@"Failed! Achievment not sent");
+            }
+        });
+    }];
 }
 
 #pragma mark - GKGameCenterControllerDelegate method implementation

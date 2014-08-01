@@ -35,6 +35,8 @@
     BOOL _gameOver;
     
     CCButton *_pauseBtn;
+    
+    CCLabelTTF *_achieveLabel;
 }
 
 @property (nonatomic) BOOL gameCenterEnabled;

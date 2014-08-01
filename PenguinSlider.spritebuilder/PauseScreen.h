@@ -19,7 +19,7 @@
     NSMutableArray *leaderboardPointsID;
     NSMutableArray *leaderboardPointsSaved;
     
-    
+    UIViewController *myViewController;
     
     BOOL userAuthenticated;
 }

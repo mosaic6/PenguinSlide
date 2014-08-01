@@ -108,6 +108,10 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     }
     if (_points == 25) {
         scrollSpeed = scrollSpeed * 1.2f;
+        _halfwayLabel.visible = YES;
+    }
+    if (_points == 27) {
+        _halfwayLabel.visible = NO;
     }
     if (_points == 30) {
         scrollSpeed = scrollSpeed * 1.2f;
@@ -124,6 +128,8 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     if (_points == 50) {
         scrollSpeed = scrollSpeed * 1.2f;
         [self winGame];
+        GKAchievement *fifty = [[GKAchievement alloc]initWithIdentifier:@"PenguinSlider50PointAchievement"];
+        [self sendAchievement:fifty];
     }
 
     
@@ -322,6 +328,21 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     
     // Finally present the view controller.
     [[CCDirector sharedDirector]presentViewController:gcViewController animated:YES completion:nil];
+}
+
+- (void)sendAchievement:(GKAchievement *)achievement{
+    achievement.percentComplete = 100.0;
+    achievement.showsCompletionBanner = YES;
+    
+    [achievement reportAchievementWithCompletionHandler:^(NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^(void){
+            if (error  == nil) {
+                NSLog(@"Success! Achievement Sent");
+            } else {
+                NSLog(@"Failed! Achievment not sent");
+            }
+        });
+    }];
 }
 
 

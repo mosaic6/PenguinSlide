@@ -28,6 +28,7 @@
     
     int64_t _points;
     CCLabelTTF *_pointLabel;
+    CCLabelTTF *_halfwayLabel;
     
     CCButton *_launchBtn;
     CCLabelTTF *_loseLabel;
